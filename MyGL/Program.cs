@@ -7,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<MyGLContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MyGLContext")));
+   // options.UseSqlServer(builder.Configuration.GetConnectionString("MyGLContext")));
+   options.UseInMemoryDatabase("Account"));
 
 var app = builder.Build();
 
