@@ -6,10 +6,16 @@ namespace MyGL.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required, Display(Name = "Bank Account")]
+        [Required, Display(Name = "Account Name")]
         public string AccountName { get; set; }
 
-        [Display(Name = "CSV Contains Header")]
-        public bool CSVHeader { get; set; }
+        [Display(Name = "Header Row")]
+        public bool HeaderRow { get; set; }
+        [Display(Name = "Date Column Number"), Range(1,10)]
+        public int? DateColNo { get; set; }
+        [Required, Display(Name = "Description Column Number"), Range(1, 10)]
+        public int DescriptionColNo { get; set; }
+        [Required, Display(Name = "Amount Column Number"), Range(1, 10)]
+        public int AmountColNo { get; set; }
     }
 }

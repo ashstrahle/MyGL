@@ -17,7 +17,16 @@
                 @Html.DisplayNameFor(model => model.Account[0].AccountName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Account[0].CSVHeader)
+                @Html.DisplayNameFor(model => model.Account[0].HeaderRow)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account[0].DateColNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account[0].DescriptionColNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account[0].AmountColNo)
             </th>
             <th></th>
         </tr>
@@ -29,7 +38,16 @@
                 @Html.DisplayFor(modelItem => item.AccountName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CSVHeader)
+                @Html.DisplayFor(modelItem => item.HeaderRow)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateColNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescriptionColNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmountColNo)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

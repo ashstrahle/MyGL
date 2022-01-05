@@ -21,8 +21,23 @@
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Account.CSVHeader" /> @Html.DisplayNameFor(model => model.Account.CSVHeader)
+                    <input class="form-check-input" asp-for="Account.HeaderRow" /> @Html.DisplayNameFor(model => model.Account.HeaderRow)
                 </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Account.DateColNo" class="control-label"></label>
+                <input asp-for="Account.DateColNo" class="form-control" />
+                <span asp-validation-for="Account.DateColNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Account.DescriptionColNo" class="control-label"></label>
+                <input asp-for="Account.DescriptionColNo" class="form-control" />
+                <span asp-validation-for="Account.DescriptionColNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Account.AmountColNo" class="control-label"></label>
+                <input asp-for="Account.AmountColNo" class="form-control" />
+                <span asp-validation-for="Account.AmountColNo" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
