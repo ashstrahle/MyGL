@@ -10,7 +10,7 @@ namespace MyGL.Data
 {
     public class MyGLContext : DbContext
     {
-        public MyGLContext (DbContextOptions<MyGLContext> options)
+        public MyGLContext(DbContextOptions<MyGLContext> options)
             : base(options)
         {
         }
@@ -20,5 +20,7 @@ namespace MyGL.Data
         public DbSet<MyGL.Models.Category> Category { get; set; }
 
         public DbSet<MyGL.Models.CategoryCondition> CategoryCondition { get; set; }
+
+        public DbSet<MyGL.Models.LoadTable> LoadTable { get; set; }
     }
 }

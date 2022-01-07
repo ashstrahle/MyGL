@@ -22,7 +22,7 @@ namespace MyGL.Pages.CategoryConditions
 
         public IActionResult OnGet()
         {
-        ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "CategorySubCategory");
+            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "CategorySubCategory");
             return Page();
         }
 
