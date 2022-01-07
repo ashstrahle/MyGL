@@ -107,9 +107,10 @@ namespace MyGL.Pages.Import
             }
             _context.SaveChanges();
 
-            ETLController etlController = new ETLController(_context);
+            var context = _context;
+            ETLController etlController = new ETLController(context);
             etlController.ExtractLoad();
-            //etlController.Transform();
+            etlController.Transform();
 
             ViewData["Info"] = "Imported " + linecount + " lines";
             return Page();

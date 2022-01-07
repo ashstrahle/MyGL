@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using MyGL.Controllers;
 using MyGL.Models;
 
 namespace MyGL.Pages.CategoryConditions
@@ -17,7 +18,7 @@ namespace MyGL.Pages.CategoryConditions
 
         public IActionResult OnGet()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "CategorySubCategory");
+            ViewData["CategoryId"] = new SelectList(_context.Category.OrderBy(c => c.CategoryName).ThenBy(c => c.SubCategory), "Id", "CategorySubCategory");
             return Page();
         }
 
@@ -34,6 +35,9 @@ namespace MyGL.Pages.CategoryConditions
 
             _context.CategoryCondition.Add(CategoryCondition);
             await _context.SaveChangesAsync();
+
+            ETLController etlController = new ETLController(_context);
+            etlController.Transform();
 
             return RedirectToPage("./Index");
         }

@@ -1,5 +1,6 @@
 ﻿#nullable disable
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MyGL.Data;
 using MyGL.Models;
 
@@ -9,7 +10,7 @@ namespace MyGL.Controllers
     {
         private MyGLContext _context;
 
-        public ETLController(MyGL.Data.MyGLContext context)
+        public ETLController(MyGLContext context)
         {
             _context = context;
         }
@@ -36,19 +37,6 @@ namespace MyGL.Controllers
                 }
             }
             _context.SaveChanges();
-            foreach (var transaction in _context.Transactions.Where(t => t.CategoryId == null))
-            {
-                foreach (var category in _context.CategoryCondition)
-                {
-                    if (transaction.Description.Contains(category.SearchString))
-                    {
-                        var updateTrans = _context.Transactions.SingleOrDefault(t => t.Id == transaction.Id);
-                        updateTrans.CategoryId = category.CategoryId;
-                        break;
-                    }
-                }
-            }
-            _context.SaveChanges();
         }
 
         public async Task Transform()
@@ -59,9 +47,10 @@ namespace MyGL.Controllers
                 {
                     if (transaction.Description.Contains(category.SearchString))
                     {
-                        var updateTrans = _context.Transactions.SingleOrDefault(t => t.Id == transaction.Id);
-                        updateTrans.CategoryId = category.CategoryId;
-                        break;
+                        Transaction update_trans = _context.Transactions.SingleOrDefault(t => t.Id == transaction.Id);
+                        update_trans.CategoryId = category.CategoryId;
+                        _context.Update(update_trans);
+                        _context.Attach(update_trans).State = EntityState.Modified;
                     }
                 }
             }
