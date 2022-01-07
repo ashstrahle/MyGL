@@ -1,13 +1,8 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using MyGL.Data;
 using MyGL.Models;
 
 namespace MyGL.Pages.CategoryConditions
@@ -38,7 +33,7 @@ namespace MyGL.Pages.CategoryConditions
             {
                 return NotFound();
             }
-           ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "CategorySubCategory");
+            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "CategorySubCategory");
             return Page();
         }
 
