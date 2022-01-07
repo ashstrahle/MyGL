@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MyGL.Controllers;
 using MyGL.Models;
 
 namespace MyGL.Pages.CategoryConditions
@@ -33,7 +34,7 @@ namespace MyGL.Pages.CategoryConditions
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "CategorySubCategory");
+            ViewData["CategoryId"] = new SelectList(_context.Category.OrderBy(c => c.CategoryName).ThenBy(c => c.SubCategory), "Id", "CategorySubCategory");
             return Page();
         }
 
@@ -63,6 +64,9 @@ namespace MyGL.Pages.CategoryConditions
                     throw;
                 }
             }
+
+            ETLController etlController = new ETLController(_context);
+            etlController.Transform();
 
             return RedirectToPage("./Index");
         }
