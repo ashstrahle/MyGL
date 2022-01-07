@@ -17,5 +17,7 @@ namespace MyGL.Models
         public int DescriptionColNo { get; set; }
         [Required, Display(Name = "Amount Column Number"), Range(1, 10)]
         public int AmountColNo { get; set; }
+        [Display(Name = "Balance Column Number"), Range(1, 10)]
+        public int ?BalanceColNo { get; set; }
     }
 }
