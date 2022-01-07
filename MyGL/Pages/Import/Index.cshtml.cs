@@ -1,22 +1,19 @@
 #nullable disable
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MyGL.Controllers;
 using MyGL.Data;
 using MyGL.Models;
+using System.Globalization;
+using System.Net.Http.Headers;
 
 namespace MyGL.Pages.Import
 {
     public class IndexModel : PageModel
     {
-        private readonly MyGL.Data.MyGLContext _context;
+        private MyGL.Data.MyGLContext _context;
 
         public IndexModel(MyGL.Data.MyGLContext context)
         {
@@ -78,16 +75,41 @@ namespace MyGL.Pages.Import
                                 record.AccountId = Account.Id;
                                 record.Date = DateTime.ParseExact(vars[(int)Account.DateColNo - 1], "d/M/yyyy", CultureInfo.InvariantCulture);
                                 record.Description = vars[Account.DescriptionColNo - 1];
-                                record.Amount = float.Parse(vars[Account.AmountColNo - 1]);
+                                record.Amount = decimal.Parse(vars[Account.AmountColNo - 1]);
                                 if (Account.BalanceColNo is not null)
-                                    record.Balance = float.Parse(vars[(int)Account.BalanceColNo - 1]);
+                                    record.Balance = decimal.Parse(vars[(int)Account.BalanceColNo - 1]);
                                 _context.Add(record);
                             }
                         }
                     }
                 }
             }
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
+
+            foreach (LoadTable record in _context.LoadTable)
+            {
+                Transaction transaction = new Transaction()
+                {
+                    Date = record.Date,
+                    Description = record.Description,
+                    Amount = record.Amount,
+                    AccountId = record.AccountId,
+                    Balance = record.Balance,
+                    Debit = record.Amount < 0 ? record.Amount : 0,
+                    DebitAmount = record.Amount < 0 ? 0 - record.Amount : 0,
+                    Credit = record.Amount > 0 ? record.Amount : 0,
+                    GST = record.Amount / 11
+                };
+                if (_context.Transactions.Where(t => t.Date == transaction.Date && t.Description == transaction.Description && t.Amount == transaction.Amount && t.AccountId == transaction.AccountId).Count() == 0)
+                {
+                    _context.Transactions.Add(transaction);
+                }
+            }
+            _context.SaveChanges();
+
+            ETLController etlController = new ETLController(_context);
+            etlController.ExtractLoad();
+            //etlController.Transform();
 
             ViewData["Info"] = "Imported " + linecount + " lines";
             return Page();

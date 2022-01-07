@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using MyGL.Data;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,8 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<MyGLContext>(options =>
-   // options.UseSqlServer(builder.Configuration.GetConnectionString("MyGLContext")));
-   options.UseInMemoryDatabase("Account"));
+   options.UseSqlServer(builder.Configuration.GetConnectionString("MyGLContext")), ServiceLifetime.Transient);
+// options.UseInMemoryDatabase("Account"));
 
 var app = builder.Build();
 
