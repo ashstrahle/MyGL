@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  generalledger:
+    image: ${DOCKER_REGISTRY-}MyGL
+    build:
+      context: .
+      dockerfile: MyGL/Dockerfile
+    ports: 
+        - "9999:80"
+        - "4431:443"
+    restart: always
