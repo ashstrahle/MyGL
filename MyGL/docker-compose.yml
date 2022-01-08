@@ -1,7 +1,7 @@
 version: '3.4'
 
 services:
-  generalledger:
+  mygl:
     image: ${DOCKER_REGISTRY-}MyGL
     build:
       context: .
