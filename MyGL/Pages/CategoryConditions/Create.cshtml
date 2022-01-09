@@ -15,7 +15,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="CategoryCondition.SearchString" class="control-label"></label>
-                <input asp-for="CategoryCondition.SearchString" class="form-control" />
+                <input asp-for="CategoryCondition.SearchString" class="form-control" Value="@ViewBag.SearchString"/>
                 <span asp-validation-for="CategoryCondition.SearchString" class="text-danger"></span>
             </div>
             <div class="form-group">
