@@ -45,8 +45,8 @@ namespace MyGL.Controllers
             // Get all uncategorized transactions
             List<Transaction> transactions = _context.Transactions.Where(t => t.CategoryId == null).ToList();
 
-            // Break transactions up into groups of 50
-            int GroupSize = 50;
+            // Break transactions up into groups of 20
+            int GroupSize = 20;
             List<List<Transaction>> TransactionGroup = new List<List<Transaction>>();
             while (transactions.Count > 0)
             {
