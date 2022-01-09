@@ -94,47 +94,7 @@ namespace MyGL.Pages.Import
                 }
             }
             _context.SaveChanges();
-            /*
-            List<LoadTable> records = _context.LoadTable.ToList();
-            // Break transactions up into groups of 100
-            int GroupSize = 100;
-            List<List<LoadTable>> RecordGroup = new List<List<LoadTable>>();
-            while (records.Count > 0)
-            {
-                int count = records.Count > GroupSize ? GroupSize : records.Count;
-                RecordGroup.Add(records.GetRange(0, count));
-                records.RemoveRange(0, count);
-            }
 
-            // Asynchronously process transaction groups
-            var tasks = RecordGroup.Select(async recgroup =>
-            {
-                foreach (LoadTable record in recgroup)
-                {
-                    if (_context.Transactions.Where(t => t.Date == record.Date && t.Description == record.Description && t.Amount == record.Amount && t.AccountId == record.AccountId && t.Balance == record.Balance).Count() == 0)
-                    {
-                        newrecordcount++;
-                        Transaction transaction = new Transaction()
-                        {
-                            Date = record.Date,
-                            Description = record.Description,
-                            Amount = record.Amount,
-                            AccountId = record.AccountId,
-                            Balance = record.Balance,
-                            Debit = record.Amount < 0 ? record.Amount : 0,
-                            DebitAmount = record.Amount < 0 ? 0 - record.Amount : 0,
-                            Credit = record.Amount > 0 ? record.Amount : 0,
-                            GST = record.Amount / 11
-                        };
-                        _context.Transactions.Add(transaction);
-                    }
-                }
-            });
-
-            // Wait for all tasks to complete
-            await Task.WhenAll(tasks);
-            _context.SaveChanges();
-            */
             ETLController etlController = new(_context);
             etlController.ExtractLoad();
             etlController.Transform();
