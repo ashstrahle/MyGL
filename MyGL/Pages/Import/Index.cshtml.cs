@@ -94,7 +94,7 @@ namespace MyGL.Pages.Import
                 }
             }
             _context.SaveChanges();
-
+            /*
             List<LoadTable> records = _context.LoadTable.ToList();
             // Break transactions up into groups of 100
             int GroupSize = 100;
@@ -134,9 +134,8 @@ namespace MyGL.Pages.Import
             // Wait for all tasks to complete
             await Task.WhenAll(tasks);
             _context.SaveChanges();
-
-            // var context = _context;
-            ETLController etlController = new ETLController(_context);
+            */
+            ETLController etlController = new(_context);
             etlController.ExtractLoad();
             etlController.Transform();
 
