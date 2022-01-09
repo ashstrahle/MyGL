@@ -34,10 +34,10 @@ namespace MyGL.Pages.CategoryConditions
             }
 
             _context.CategoryCondition.Add(CategoryCondition);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
-            ETLController etlController = new ETLController(_context);
-            etlController.Transform();
+            // ETLController etlController = new ETLController(_context);
+            // etlController.Transform();
 
             return RedirectToPage("./Index");
         }

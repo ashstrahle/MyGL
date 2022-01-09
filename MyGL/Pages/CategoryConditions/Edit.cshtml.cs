@@ -67,13 +67,13 @@ namespace MyGL.Pages.CategoryConditions
             // Update Category for all Transactions that match this updated CategoryCondition
             foreach(Transaction transaction in _context.Transactions.Where(t => t.Description.Contains(CategoryCondition.SearchString)))
             {
-                transaction.CategoryId = null;
+                transaction.CategoryId = CategoryCondition.CategoryId;
                 _context.Attach(transaction).State = EntityState.Modified;          
             }
             _context.SaveChanges();
 
-            ETLController etlController = new ETLController(_context);
-            etlController.Transform();
+           // ETLController etlController = new ETLController(_context);
+           // etlController.Transform();
 
             return RedirectToPage("./Index");
         }
