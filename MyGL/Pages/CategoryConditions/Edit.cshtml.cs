@@ -51,7 +51,7 @@ namespace MyGL.Pages.CategoryConditions
 
             try
             {
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -64,6 +64,13 @@ namespace MyGL.Pages.CategoryConditions
                     throw;
                 }
             }
+            // Update Category for all Transactions that match this updated CategoryCondition
+            foreach(Transaction transaction in _context.Transactions.Where(t => t.Description.Contains(CategoryCondition.SearchString)))
+            {
+                transaction.CategoryId = null;
+                _context.Attach(transaction).State = EntityState.Modified;          
+            }
+            _context.SaveChanges();
 
             ETLController etlController = new ETLController(_context);
             etlController.Transform();

@@ -18,7 +18,7 @@ namespace MyGL.Pages.CategoryConditions
 
         public async Task OnGetAsync()
         {
-            CategoryCondition = await _context.CategoryCondition
+            CategoryCondition = await _context.CategoryCondition.OrderBy(c => c.SearchString)
                 .Include(c => c.Category).ToListAsync();
         }
     }
