@@ -31,6 +31,7 @@ namespace MyGL.Pages.Import
             ETLController etlController = new ETLController(_context);
             etlController.Transform();
 
+            ViewData["AccountList"] = new SelectList(_context.Account, "Id", "AccountName");
             return Page();
         }
 
