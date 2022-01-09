@@ -87,7 +87,7 @@ namespace MyGL.Pages.Import
                                 record.Amount = decimal.Parse(vars[Account.AmountColNo - 1]);
                                 if (Account.BalanceColNo is not null)
                                     record.Balance = decimal.Parse(vars[(int)Account.BalanceColNo - 1]);
-                                _context.Add(record);
+                                _context.Update(record);
                             }
                         }
                     }

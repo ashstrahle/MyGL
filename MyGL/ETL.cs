@@ -48,7 +48,7 @@ namespace MyGL.Controllers
                             Credit = record.Amount > 0 ? record.Amount : 0,
                             GST = record.Amount / 11
                         };
-                        _context.Transactions.Add(transaction);
+                        _context.Transactions.Update(transaction);
                     }
                 }
             });
