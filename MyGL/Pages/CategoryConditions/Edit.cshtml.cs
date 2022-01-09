@@ -65,7 +65,7 @@ namespace MyGL.Pages.CategoryConditions
                 }
             }
             // Update Category for all Transactions that match this updated CategoryCondition
-            foreach(Transaction transaction in _context.Transactions.Where(t => t.Description.Contains(CategoryCondition.SearchString)))
+            foreach(Transaction transaction in _context.Transactions.Where(t => t.Description.ToUpper().Contains(CategoryCondition.SearchString.ToUpper())))
             {
                 transaction.CategoryId = CategoryCondition.CategoryId;
                 _context.Attach(transaction).State = EntityState.Modified;          

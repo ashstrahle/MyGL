@@ -43,6 +43,8 @@ namespace MyGL.Pages.Import
 
         public async Task<IActionResult> OnPostAsync()
         {
+            int linecount = 0;
+            int newrecordcount = 0;
             Account = await _context.Account.FirstOrDefaultAsync(m => m.Id == Account.Id);
             ViewData["AccountList"] = new SelectList(_context.Account, "Id", "AccountName");
 
@@ -62,7 +64,6 @@ namespace MyGL.Pages.Import
             _context.LoadTable.RemoveRange(_context.LoadTable);
             _context.SaveChanges();
 
-            int linecount = 0;
             foreach (var file in CSVFiles)
             {
                 if (file.Length > 0)
@@ -94,25 +95,44 @@ namespace MyGL.Pages.Import
             }
             _context.SaveChanges();
 
-            foreach (LoadTable record in _context.LoadTable)
+            List<LoadTable> records = _context.LoadTable.ToList();
+            // Break transactions up into groups of 20
+            int GroupSize = 20;
+            List<List<LoadTable>> RecordGroup = new List<List<LoadTable>>();
+            while (records.Count > 0)
             {
-                Transaction transaction = new Transaction()
-                {
-                    Date = record.Date,
-                    Description = record.Description,
-                    Amount = record.Amount,
-                    AccountId = record.AccountId,
-                    Balance = record.Balance,
-                    Debit = record.Amount < 0 ? record.Amount : 0,
-                    DebitAmount = record.Amount < 0 ? 0 - record.Amount : 0,
-                    Credit = record.Amount > 0 ? record.Amount : 0,
-                    GST = record.Amount / 11
-                };
-                if (_context.Transactions.Where(t => t.Date == transaction.Date && t.Description == transaction.Description && t.Amount == transaction.Amount && t.AccountId == transaction.AccountId).Count() == 0)
-                {
-                    _context.Transactions.Add(transaction);
-                }
+                int count = records.Count > GroupSize ? GroupSize : records.Count;
+                RecordGroup.Add(records.GetRange(0, count));
+                records.RemoveRange(0, count);
             }
+
+            // Asynchronously process transaction groups
+            var tasks = RecordGroup.Select(async recgroup =>
+            {
+                foreach (LoadTable record in recgroup)
+                {
+                    if (_context.Transactions.Where(t => t.Date == record.Date && t.Description == record.Description && t.Amount == record.Amount && t.AccountId == record.AccountId && t.Balance == record.Balance).Count() == 0)
+                    {
+                        newrecordcount++;
+                        Transaction transaction = new Transaction()
+                        {
+                            Date = record.Date,
+                            Description = record.Description,
+                            Amount = record.Amount,
+                            AccountId = record.AccountId,
+                            Balance = record.Balance,
+                            Debit = record.Amount < 0 ? record.Amount : 0,
+                            DebitAmount = record.Amount < 0 ? 0 - record.Amount : 0,
+                            Credit = record.Amount > 0 ? record.Amount : 0,
+                            GST = record.Amount / 11
+                        };
+                        _context.Transactions.Add(transaction);
+                    }
+                }
+            });
+
+            // Wait for all tasks to complete
+            await Task.WhenAll(tasks);
             _context.SaveChanges();
 
             var context = _context;
@@ -120,7 +140,7 @@ namespace MyGL.Pages.Import
             etlController.ExtractLoad();
             etlController.Transform();
 
-            ViewData["Info"] = "Imported " + linecount + " lines";
+            ViewData["Info"] = "Read " + linecount + " lines, created " + newrecordcount + " new records";
             return Page();
         }
     }

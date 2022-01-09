@@ -72,7 +72,7 @@ namespace MyGL.Controllers
             {
                 foreach (var category in _context.CategoryCondition)
                 {
-                    if (transaction.Description.Contains(category.SearchString))
+                    if (transaction.Description.ToUpper().Contains(category.SearchString.ToUpper()))
                     {
                         transaction.CategoryId = category.CategoryId;
                         _context.Attach(transaction).State = EntityState.Modified;
