@@ -60,12 +60,14 @@ namespace MyGL.Pages.Import
                 return Page();
             }
 
-            // Clear load table
-            _context.LoadTable.RemoveRange(_context.LoadTable);
-            _context.SaveChanges();
+            ETLController etlController = new(_context);
 
             foreach (var file in CSVFiles)
             {
+                // Clear load table
+                _context.LoadTable.RemoveRange(_context.LoadTable);
+                _context.SaveChanges();
+
                 if (file.Length > 0)
                 {
                     var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
@@ -74,11 +76,11 @@ namespace MyGL.Pages.Import
                     {
                         while (reader.Peek() >= 0)
                         {
-                            var line = reader.ReadLine().Replace("\"", "").Replace("'", "''");
+                            var line = reader.ReadLine().Replace("\"", "");
                             linecount++;
                             if (!(Account.HeaderRow == true && linecount == 1) && line.Length > 0)
                             {
-                                LoadTable record = new LoadTable();
+                                LoadTable record = new();
                                 // Recreate line with quotes
                                 var vars = line.Split(',');
                                 record.AccountId = Account.Id;
@@ -87,16 +89,15 @@ namespace MyGL.Pages.Import
                                 record.Amount = decimal.Parse(vars[Account.AmountColNo - 1]);
                                 if (Account.BalanceColNo is not null)
                                     record.Balance = decimal.Parse(vars[(int)Account.BalanceColNo - 1]);
-                                _context.Update(record);
+                                _context.Add(record);
                             }
                         }
                     }
+                    _context.SaveChanges();
+                    etlController.ExtractLoad();
                 }
             }
-            _context.SaveChanges();
 
-            ETLController etlController = new(_context);
-            etlController.ExtractLoad();
             etlController.Transform();
 
             ViewData["Info"] = "Read " + linecount + " lines";
