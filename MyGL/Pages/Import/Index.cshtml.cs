@@ -44,7 +44,7 @@ namespace MyGL.Pages.Import
         public async Task<IActionResult> OnPostAsync()
         {
             int linecount = 0;
-            int newrecordcount = 0;
+
             Account = await _context.Account.FirstOrDefaultAsync(m => m.Id == Account.Id);
             ViewData["AccountList"] = new SelectList(_context.Account, "Id", "AccountName");
 
@@ -99,7 +99,7 @@ namespace MyGL.Pages.Import
             etlController.ExtractLoad();
             etlController.Transform();
 
-            ViewData["Info"] = "Read " + linecount + " lines, created " + newrecordcount + " new records";
+            ViewData["Info"] = "Read " + linecount + " lines";
             return Page();
         }
     }
