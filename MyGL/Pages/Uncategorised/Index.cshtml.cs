@@ -18,7 +18,7 @@ namespace MyGL.Pages.Uncategorised
 
         public async Task OnGetAsync()
         {
-            Transactions = await _context.Transactions.Where(t => t.CategoryId == null).OrderBy(t => t.Date).ToListAsync();
+            Transactions = await _context.Transactions.Where(t => t.CategoryId == null).OrderByDescending(t => t.Date).ToListAsync();
         }
     }
 }
