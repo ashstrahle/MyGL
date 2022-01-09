@@ -20,12 +20,17 @@ namespace MyGL.Pages.Import
             _context = context;
         }
 
-        // public IList<Account> Accounts { get; set; }
-        // public Account Account { get; set; }
-
         public IActionResult OnGet()
         {
             ViewData["AccountList"] = new SelectList(_context.Account, "Id", "AccountName");
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostUpdateButton()
+        {
+            ETLController etlController = new ETLController(_context);
+            etlController.Transform();
+
             return Page();
         }
 

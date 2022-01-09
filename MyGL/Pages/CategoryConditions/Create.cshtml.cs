@@ -16,8 +16,10 @@ namespace MyGL.Pages.CategoryConditions
             _context = context;
         }
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(string SearchString = "")
         {
+
+            ViewData["SearchString"] = SearchString;
             ViewData["CategoryId"] = new SelectList(_context.Category.OrderBy(c => c.CategoryName).ThenBy(c => c.SubCategory), "Id", "CategorySubCategory");
             return Page();
         }
