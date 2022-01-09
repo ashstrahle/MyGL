@@ -31,6 +31,8 @@ namespace MyGL.Pages.Import
             ETLController etlController = new ETLController(_context);
             etlController.Transform();
 
+            ViewData["Info"] = "Database update complete";
+
             ViewData["AccountList"] = new SelectList(_context.Account, "Id", "AccountName");
             return Page();
         }
