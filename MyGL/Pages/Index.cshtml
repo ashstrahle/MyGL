@@ -22,6 +22,9 @@
             <th>
                 Total Transactions
             </th>
+            <th>
+                Total Uncategorised
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -29,7 +32,7 @@
         {
             <tr>
                 <td>
-                    @item.Account
+                    <a asp-page="/Accounts/Details" asp-route-id="@item.Account.Id">@item.Account.AccountName</a>
                 </td>
                 <td>
                     @item.LatestTrans
@@ -37,7 +40,11 @@
                 <td>
                     @item.TransCount
                 </td>
+                <td>
+                    <a asp-page="/Uncategorised/Index">  @item.UncategorisedCount</a>
+                </td>
             </tr>
         }
     </tbody>
 </table>
+ 
