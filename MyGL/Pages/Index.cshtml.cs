@@ -20,9 +20,10 @@ namespace MyGL.Pages
 
         public class Stat
         {
-            public string Account { get; set; }
-            public int TransCount { get; set; }
+            public Account Account { get; set; }           
             public string LatestTrans { get; set; }
+            public int TransCount { get; set; }
+            public int UncategorisedCount { get; set; }
         }
 
         public List<Stat> Stats = new();
@@ -33,10 +34,11 @@ namespace MyGL.Pages
             {
                 Stats.Add(new Stat()
                 {
-                    Account = account.AccountName,
+                    Account = account,
                     TransCount = _context.Transactions.Where(t => t.AccountId == account.Id).Count(),
                     LatestTrans = _context.Transactions.Where(t => t.AccountId == account.Id)
-                        .OrderByDescending(t => t.Date).FirstOrDefault().Date.ToString("d/M/yyyy")
+                        .OrderByDescending(t => t.Date).FirstOrDefault().Date.ToString("d/M/yyyy"),
+                    UncategorisedCount = _context.Transactions.Where(t => t.AccountId == account.Id && t.CategoryId == null).Count()
                 });
             }
         }
