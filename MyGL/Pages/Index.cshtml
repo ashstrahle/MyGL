@@ -5,6 +5,39 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">MyGL</h1>
 </div>
+
+<h4>Stats</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Account
+            </th>
+            <th>
+                Latest Transaction
+            </th>
+            <th>
+                Total Transactions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Stats)
+        {
+            <tr>
+                <td>
+                    @item.Account
+                </td>
+                <td>
+                    @item.LatestTrans
+                </td>
+                <td>
+                    @item.TransCount
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
