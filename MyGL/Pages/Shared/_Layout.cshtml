@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MyGL.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
 </head>
 <body>
     <header>
@@ -42,6 +43,14 @@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
+            <div id="processing" class="processing visually-hidden">
+                <i class="fas fa-spinner fa-spin"></i>
+                <label>Processing...</label>
+            </div>
+            <br />
+            <footer>
+                @Html.ValidationMessage("Error", new { @class = "text-danger" })
+            </footer>
         </main>
     </div>
 
@@ -54,6 +63,34 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>var links = document.querySelectorAll('a')
+        for (var i = 0, len = links.length; i < len; i++) {
+            if (!(links[i].getAttribute("href").includes("file="))) {
+                links[i].onclick = function () {
+                    $("#processing").removeClass("visually-hidden");
+                }
+            }
+        }
+        var buttons = document.getElementsByTagName("button");
+        for (var i = 0, len = buttons.length; i < len; i++) {
+            if (!(buttons[i].onclick)) {
+                buttons[i].onclick = function () {
+                    $("#processing").removeClass("visually-hidden");
+                }
+            }
+        }
+
+        window.addEventListener("pageshow", function (event) {
+            var historyTraversal = event.persisted ||
+                (typeof window.performance != "undefined" &&
+                    window.performance.navigation.type === 2);
+            if (historyTraversal) {
+                // Handle page restore
+                // On page reload (back button), hide any residual processing window
+                $("#processing").addClass("visually-hidden");
+            }
+        });</script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
