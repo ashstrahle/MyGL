@@ -25,7 +25,7 @@ namespace MyGL.Pages.CategoryConditions
                 return NotFound();
             }
 
-            CategoryCondition = await _context.CategoryCondition
+            CategoryCondition = await _context.CategoryConditions
                 .Include(c => c.Category).FirstOrDefaultAsync(m => m.Id == id);
 
             if (CategoryCondition == null)
@@ -42,11 +42,11 @@ namespace MyGL.Pages.CategoryConditions
                 return NotFound();
             }
 
-            CategoryCondition = await _context.CategoryCondition.FindAsync(id);
+            CategoryCondition = await _context.CategoryConditions.FindAsync(id);
 
             if (CategoryCondition != null)
             {
-                _context.CategoryCondition.Remove(CategoryCondition);
+                _context.CategoryConditions.Remove(CategoryCondition);
                 await _context.SaveChangesAsync();
             }
 

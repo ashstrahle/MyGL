@@ -18,7 +18,7 @@ namespace MyGL.Pages.Categories
 
         public async Task OnGetAsync()
         {
-            Category = await _context.Category.OrderBy(c => c.CategoryName).ThenBy(c => c.SubCategory).ToListAsync();
+            Category = await _context.Categories.OrderBy(c => c.CategoryName).ThenBy(c => c.SubCategory).ToListAsync();
         }
     }
 }
