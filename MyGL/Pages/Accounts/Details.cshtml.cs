@@ -24,7 +24,7 @@ namespace MyGL.Pages.Accounts
                 return NotFound();
             }
 
-            Account = await _context.Account.FirstOrDefaultAsync(m => m.Id == id);
+            Account = await _context.Accounts.FirstOrDefaultAsync(m => m.Id == id);
 
             if (Account == null)
             {

@@ -24,7 +24,7 @@ namespace MyGL.Pages.CategoryConditions
                 return NotFound();
             }
 
-            CategoryCondition = await _context.CategoryCondition
+            CategoryCondition = await _context.CategoryConditions
                 .Include(c => c.Category).FirstOrDefaultAsync(m => m.Id == id);
 
             if (CategoryCondition == null)
