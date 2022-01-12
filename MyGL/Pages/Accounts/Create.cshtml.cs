@@ -52,7 +52,7 @@ namespace MyGL.Pages.Accounts
                 }
             }
 
-            _context.Account.Add(Account);
+            _context.Accounts.Add(Account);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

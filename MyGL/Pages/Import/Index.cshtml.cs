@@ -22,7 +22,7 @@ namespace MyGL.Pages.Import
 
         public IActionResult OnGet()
         {
-            ViewData["AccountList"] = new SelectList(_context.Account, "Id", "AccountName");
+            ViewData["AccountList"] = new SelectList(_context.Accounts, "Id", "AccountName");
             return Page();
         }
 
@@ -33,7 +33,7 @@ namespace MyGL.Pages.Import
 
             ViewData["Info"] = "Database update complete";
 
-            ViewData["AccountList"] = new SelectList(_context.Account, "Id", "AccountName");
+            ViewData["AccountList"] = new SelectList(_context.Accounts, "Id", "AccountName");
             return Page();
         }
 
@@ -45,8 +45,8 @@ namespace MyGL.Pages.Import
         {
             int linecount = 0;
 
-            Account = await _context.Account.FirstOrDefaultAsync(m => m.Id == Account.Id);
-            ViewData["AccountList"] = new SelectList(_context.Account, "Id", "AccountName");
+            Account = await _context.Accounts.FirstOrDefaultAsync(m => m.Id == Account.Id);
+            ViewData["AccountList"] = new SelectList(_context.Accounts, "Id", "AccountName");
 
             if (Account == null)
             {

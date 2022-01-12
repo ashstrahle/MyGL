@@ -27,14 +27,14 @@ namespace MyGL.Pages.CategoryConditions
                 return NotFound();
             }
 
-            CategoryCondition = await _context.CategoryCondition
+            CategoryCondition = await _context.CategoryConditions
                 .Include(c => c.Category).FirstOrDefaultAsync(m => m.Id == id);
 
             if (CategoryCondition == null)
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category.OrderBy(c => c.CategoryName).ThenBy(c => c.SubCategory), "Id", "CategorySubCategory");
+            ViewData["CategoryId"] = new SelectList(_context.Categories.OrderBy(c => c.CategoryName).ThenBy(c => c.SubCategory), "Id", "CategorySubCategory");
             return Page();
         }
 
@@ -80,7 +80,7 @@ namespace MyGL.Pages.CategoryConditions
 
         private bool CategoryConditionExists(int id)
         {
-            return _context.CategoryCondition.Any(e => e.Id == id);
+            return _context.CategoryConditions.Any(e => e.Id == id);
         }
     }
 }

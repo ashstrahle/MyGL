@@ -25,7 +25,7 @@ namespace MyGL.Pages.Categories
                 return NotFound();
             }
 
-            Category = await _context.Category.FirstOrDefaultAsync(m => m.Id == id);
+            Category = await _context.Categories.FirstOrDefaultAsync(m => m.Id == id);
 
             if (Category == null)
             {
@@ -41,11 +41,11 @@ namespace MyGL.Pages.Categories
                 return NotFound();
             }
 
-            Category = await _context.Category.FindAsync(id);
+            Category = await _context.Categories.FindAsync(id);
 
             if (Category != null)
             {
-                _context.Category.Remove(Category);
+                _context.Categories.Remove(Category);
                 await _context.SaveChangesAsync();
             }
 

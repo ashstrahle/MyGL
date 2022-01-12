@@ -24,5 +24,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\lib\font-awesome\" />
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Controllers\" />
   </ItemGroup>
 </Project>
