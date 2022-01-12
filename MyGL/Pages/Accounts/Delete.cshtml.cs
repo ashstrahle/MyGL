@@ -25,7 +25,7 @@ namespace MyGL.Pages.Accounts
                 return NotFound();
             }
 
-            Account = await _context.Account.FirstOrDefaultAsync(m => m.Id == id);
+            Account = await _context.Accounts.FirstOrDefaultAsync(m => m.Id == id);
 
             if (Account == null)
             {
@@ -41,11 +41,11 @@ namespace MyGL.Pages.Accounts
                 return NotFound();
             }
 
-            Account = await _context.Account.FindAsync(id);
+            Account = await _context.Accounts.FindAsync(id);
 
             if (Account != null)
             {
-                _context.Account.Remove(Account);
+                _context.Accounts.Remove(Account);
                 await _context.SaveChangesAsync();
             }
 

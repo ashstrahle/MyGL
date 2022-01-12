@@ -30,7 +30,10 @@ namespace MyGL.Pages
 
         public void OnGet()
         {
-            foreach (Account account in _context.Account)
+            // DimDateController ddc = new(_context);
+            // ddc.Generate(DateTime.ParseExact("01/01/2016", "d/M/yyyy", CultureInfo.InvariantCulture), DateTime.ParseExact("31/12/2030", "d/M/yyyy", CultureInfo.InvariantCulture));
+
+            foreach (Account account in _context.Accounts)
             {
                 Stats.Add(new Stat()
                 {

@@ -36,7 +36,7 @@ namespace MyGL.Controllers
                     // Only add transaction if it doesn't already exist
                     if (_context.Transactions.Where(t => t.Date == record.Date && t.Description == record.Description && t.Amount == record.Amount && t.AccountId == record.AccountId && t.Balance == record.Balance).Count() == 0)
                     {
-                        Transaction transaction = new Transaction()
+                        Transaction transaction = new()
                         {
                             Date = record.Date,
                             Description = record.Description,
@@ -88,7 +88,7 @@ namespace MyGL.Controllers
         {
             foreach (Transaction transaction in transactions)
             {
-                foreach (var category in _context.CategoryCondition)
+                foreach (var category in _context.CategoryConditions)
                 {
                     if (transaction.Description.ToUpper().Contains(category.SearchString.ToUpper()))
                     {

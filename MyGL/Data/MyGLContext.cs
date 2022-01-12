@@ -10,10 +10,11 @@ namespace MyGL.Data
         {
         }
 
-        public DbSet<MyGL.Models.Account> Account { get; set; }
-        public DbSet<MyGL.Models.Category> Category { get; set; }
-        public DbSet<MyGL.Models.CategoryCondition> CategoryCondition { get; set; }
+        public DbSet<MyGL.Models.Account> Accounts { get; set; }
+        public DbSet<MyGL.Models.Category> Categories { get; set; }
+        public DbSet<MyGL.Models.CategoryCondition> CategoryConditions { get; set; }
         public DbSet<MyGL.Models.LoadTable> LoadTable { get; set; }
         public DbSet<MyGL.Models.Transaction> Transactions { get; set; }
+        public DbSet<MyGL.Models.DimDate> DimDates { get; set; }
     }
 }

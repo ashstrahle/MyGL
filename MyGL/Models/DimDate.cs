@@ -4,6 +4,7 @@ namespace MyGL.Models
 {
     public class DimDate
     {
+        [Key]
         public int Id { get; set; }
         public int DateId { get; set; }
         [DataType(DataType.Date)]
@@ -20,14 +21,14 @@ namespace MyGL.Models
         [Display(Name = "Week Day (Short)")]
         public string WeekDayShort { get; set; }
         [Display(Name = "Day Of Week")]
-        public string DayOfWeek { get; set; }
+        public int DayOfWeek { get; set; }
         public int Quarter { get; set; }
         [Display(Name = "Quarter (Format)")]
         public string QuarterFormat { get; set; }
         [Display(Name = "Day Of Year")]
         public int DayOfYear { get; set; }
         [Display(Name = "Week Number")]
-        public int WeekNunber { get; set; }
+        public int WeekNumber { get; set; }
         [Display(Name = "Week Number (Format)")]
         public string WeekNumberFormat { get; set; }
         [Display(Name = "Month Name (Format)")]

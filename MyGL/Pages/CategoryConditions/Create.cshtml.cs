@@ -20,7 +20,7 @@ namespace MyGL.Pages.CategoryConditions
         {
 
             ViewData["SearchString"] = SearchString;
-            ViewData["CategoryId"] = new SelectList(_context.Category.OrderBy(c => c.CategoryName).ThenBy(c => c.SubCategory), "Id", "CategorySubCategory");
+            ViewData["CategoryId"] = new SelectList(_context.Categories.OrderBy(c => c.CategoryName).ThenBy(c => c.SubCategory), "Id", "CategorySubCategory");
             return Page();
         }
 
@@ -35,7 +35,7 @@ namespace MyGL.Pages.CategoryConditions
                 return Page();
             }
 
-            _context.CategoryCondition.Add(CategoryCondition);
+            _context.CategoryConditions.Add(CategoryCondition);
             _context.SaveChanges();
 
             // ETLController etlController = new ETLController(_context);
