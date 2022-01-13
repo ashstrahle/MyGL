@@ -33,13 +33,15 @@
   <ItemGroup>
     <Folder Include="wwwroot\lib\font-awesome\" />
     <Folder Include="Controllers\" />
-    <Folder Include="Pages\Pivot\" />
+    <Folder Include="Pages\Reports\" />
+    <Folder Include="Pages\Reports\Pivot\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Controllers\" />
     <None Remove="Syncfusion.EJ2.AspNet.Core" />
     <None Remove="Syncfusion.Licensing" />
     <None Remove="Newtonsoft.Json" />
-    <None Remove="Pages\Pivot\" />
+    <None Remove="Pages\Reports\" />
+    <None Remove="Pages\Reports\Pivot\" />
   </ItemGroup>
 </Project>
