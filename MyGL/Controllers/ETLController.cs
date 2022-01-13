@@ -1,4 +1,5 @@
 ﻿#nullable disable
+using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyGL.Data;
@@ -39,6 +40,7 @@ namespace MyGL.Controllers
                         Transaction transaction = new()
                         {
                             Date = record.Date,
+                            MonthAsDate = DateTime.ParseExact("01/" + record.Date.Month + "/" + record.Date.Year, "d/M/yyyy", CultureInfo.InvariantCulture),
                             Description = record.Description,
                             Amount = record.Amount,
                             AccountId = record.AccountId,
