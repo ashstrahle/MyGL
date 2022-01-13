@@ -40,7 +40,6 @@ namespace MyGL.Controllers
                         Transaction transaction = new()
                         {
                             Date = record.Date,
-                            MonthAsDate = DateTime.ParseExact("01/" + record.Date.Month + "/" + record.Date.Year, "d/M/yyyy", CultureInfo.InvariantCulture),
                             Description = record.Description,
                             Amount = record.Amount,
                             AccountId = record.AccountId,

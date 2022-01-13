@@ -51,7 +51,7 @@ namespace MyGL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Accounts");
+                    b.ToTable("Accounts", (string)null);
                 });
 
             modelBuilder.Entity("MyGL.Models.Category", b =>
@@ -72,7 +72,7 @@ namespace MyGL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("MyGL.Models.CategoryCondition", b =>
@@ -94,7 +94,7 @@ namespace MyGL.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("CategoryConditions");
+                    b.ToTable("CategoryConditions", (string)null);
                 });
 
             modelBuilder.Entity("MyGL.Models.DimDate", b =>
@@ -185,7 +185,7 @@ namespace MyGL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DimDates");
+                    b.ToTable("DimDates", (string)null);
                 });
 
             modelBuilder.Entity("MyGL.Models.LoadTable", b =>
@@ -216,7 +216,7 @@ namespace MyGL.Migrations
 
                     b.HasIndex("AccountId");
 
-                    b.ToTable("LoadTable");
+                    b.ToTable("LoadTable", (string)null);
                 });
 
             modelBuilder.Entity("MyGL.Models.Transaction", b =>
@@ -258,16 +258,13 @@ namespace MyGL.Migrations
                     b.Property<decimal>("GST")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime>("MonthAsDate")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AccountId");
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Transactions");
+                    b.ToTable("Transactions", (string)null);
                 });
 
             modelBuilder.Entity("MyGL.Models.CategoryCondition", b =>
