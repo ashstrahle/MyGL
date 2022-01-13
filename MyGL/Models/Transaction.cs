@@ -14,14 +14,13 @@ namespace MyGL.Models
         public int? CategoryId { get; set; }
         public virtual Category? Category { get; set; }
         //[Display(Name = "Days Since Last")]
-       // public int? DaysSinceLast { get; set; }
+       // public int ?DaysSinceLast { get; set; }
         public decimal Amount { get; set; }
         public decimal Debit { get; set; }
         [Display(Name = "Debit Amount")]
         public decimal DebitAmount { get; set; }
         public decimal Credit { get; set; }
         public decimal GST { get; set; }
-
         [Required, Display(Name = "Account Name")]
         public int AccountId { get; set; }
         public virtual Account? Account { get; set; }
