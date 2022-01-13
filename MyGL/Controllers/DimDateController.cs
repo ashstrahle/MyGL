@@ -52,9 +52,9 @@ namespace MyGL
                         MonthNameShortFormat = CurrentDate.Month.ToString("D2") + " - " + CurrentDate.ToString("MMM"),
                         FinancialYear = (CurrentDate.Month < 7 ? (int)(CurrentDate.Year - 1) + "/" + CurrentDate.Year : CurrentDate.Year + "/" + (int)(CurrentDate.Year + 1)),
                         FinancialQuarter = (int)(((CurrentDate.Month + 5) % 12) / 3) + 1,
-                        FinancialQuarterFormat = "Q" + (int)((((CurrentDate.Month + 5) % 12) / 3) + 1),
-                        FinancialQuarterMonthFormat = "Q" + (int)((((CurrentDate.Month + 5) % 12) / 3) + 1) + "/" + CurrentDate.Month.ToString("D2") + " - " + CurrentDate.ToString("MMMM"),
-                        FinancialQuarterMonthShortFormat = "Q" + (int)((((CurrentDate.Month + 5) % 12) / 3) + 1) + "/" + CurrentDate.Month.ToString("D2") + " - " + CurrentDate.ToString("MMM")
+                        FinancialQuarterFormat = "FQ" + (int)((((CurrentDate.Month + 5) % 12) / 3) + 1),
+                        FinancialQuarterMonthFormat = "FQ" + (int)((((CurrentDate.Month + 5) % 12) / 3) + 1) + "/" + CurrentDate.Month.ToString("D2") + " - " + CurrentDate.ToString("MMMM"),
+                        FinancialQuarterMonthShortFormat = "FQ" + (int)((((CurrentDate.Month + 5) % 12) / 3) + 1) + "/" + CurrentDate.Month.ToString("D2") + " - " + CurrentDate.ToString("MMM")
                     };
                     _context.Update(dimDate);
                 }
