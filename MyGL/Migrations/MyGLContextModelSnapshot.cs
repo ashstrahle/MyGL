@@ -258,6 +258,9 @@ namespace MyGL.Migrations
                     b.Property<decimal>("GST")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<DateTime>("MonthAsDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AccountId");
