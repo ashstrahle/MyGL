@@ -82,6 +82,12 @@ namespace MyGL.Controllers
             // Wait for all tasks to complete
             await Task.WhenAll(tasks);
             _context.SaveChanges();
+
+            // Update DimDate
+            DateTime FirstDate = _context.Transactions.OrderBy(t => t.Date).FirstOrDefault().Date;
+            DateTime LastDate = _context.Transactions.OrderByDescending(t => t.Date).FirstOrDefault().Date;
+            DimDateController ddc = new(_context);
+            ddc.Generate(FirstDate, LastDate);
         }
 
         public async Task Categorise(List<Transaction> transactions)
