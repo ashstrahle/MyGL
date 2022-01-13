@@ -3,18 +3,19 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyGL.Data;
-using MyGL.Models;
 
 #nullable disable
 
 namespace MyGL.Migrations
 {
     [DbContext(typeof(MyGLContext))]
-    partial class MyGLContextModelSnapshot : ModelSnapshot
+    [Migration("20220113115239_PivotDataView")]
+    partial class PivotDataView
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -312,14 +313,6 @@ namespace MyGL.Migrations
 
                     b.Navigation("Category");
                 });
-
-
-            modelBuilder.Entity<PivotData>(d =>
-            {
-                d.HasNoKey();
-                d.ToView("View_PivotData");
-            });
-
 #pragma warning restore 612, 618
         }
     }

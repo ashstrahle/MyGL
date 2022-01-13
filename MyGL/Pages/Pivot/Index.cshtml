@@ -1,0 +1,32 @@
+@page
+@model MyGL.Pages.Pivot.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<ejs-pivotview id="PivotView" height="1000" width="2000" enableVirtualization="true">
+    <e-datasourcesettings dataSource="@ViewBag.DataSource" expandAll="false" enableSorting="true">
+        <e-formatsettings>
+            <e-field name="Amount" format="C0" maximumSignificantDigits="10" minimumSignificantDigits="1" useGrouping="true"></e-field>
+        </e-formatsettings>
+        <e-rows>
+            <e-field name="CategoryName" caption="Category"></e-field>
+            <e-field name="SubCategory" caption="Sub Category"></e-field>
+        </e-rows>
+        <e-columns>
+            <e-field name="FinancialYear" caption="FY"></e-field>
+            <e-field name="FinancialQuarterFormat" caption="FQ"></e-field>
+            <e-field name="MonthNameShortFormat" caption="Month"></e-field>
+        </e-columns>
+        <e-values>
+            <e-field name="Amount" caption="Amount"></e-field>
+        </e-values>
+    </e-datasourcesettings>
+</ejs-pivotview>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

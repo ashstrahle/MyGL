@@ -22,6 +22,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.1" />
+    <PackageReference Include="Syncfusion.EJ2.AspNet.Core" Version="19.4.0.42" />
+    <PackageReference Include="Syncfusion.Licensing" Version="19.4.0.42" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,8 +33,13 @@
   <ItemGroup>
     <Folder Include="wwwroot\lib\font-awesome\" />
     <Folder Include="Controllers\" />
+    <Folder Include="Pages\Pivot\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Controllers\" />
+    <None Remove="Syncfusion.EJ2.AspNet.Core" />
+    <None Remove="Syncfusion.Licensing" />
+    <None Remove="Newtonsoft.Json" />
+    <None Remove="Pages\Pivot\" />
   </ItemGroup>
 </Project>
