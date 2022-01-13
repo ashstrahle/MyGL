@@ -86,7 +86,17 @@ namespace MyGL.Pages.Import
                                 record.AccountId = Account.Id;
                                 record.Date = DateTime.ParseExact(vars[(int)Account.DateColNo - 1], "d/M/yyyy", CultureInfo.InvariantCulture);
                                 record.Description = vars[Account.DescriptionColNo - 1];
-                                record.Amount = decimal.Parse(vars[Account.AmountColNo - 1]);
+                                if (Account.AmountColNo is not null)
+                                {
+                                    record.Amount = decimal.Parse(vars[(int)Account.AmountColNo - 1]);
+                                }
+                                else
+                                {
+                                    if (vars[(int)Account.CreditColNo - 1] != "")
+                                        record.Amount = decimal.Parse(vars[(int)Account.CreditColNo - 1]);
+                                    else
+                                        record.Amount = decimal.Parse(vars[(int)Account.DebitColNo - 1]);
+                                }
                                 if (Account.BalanceColNo is not null)
                                     record.Balance = decimal.Parse(vars[(int)Account.BalanceColNo - 1]);
                                 _context.Add(record);
