@@ -1,12 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyGL.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<MyGLContext>(options =>
-   options.UseSqlServer(builder.Configuration.GetConnectionString("MyGLContext")), ServiceLifetime.Transient);
+   options.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("MyGLContext")), ServiceLifetime.Transient);
+
 // options.UseInMemoryDatabase("Account"));
 
 var app = builder.Build();
