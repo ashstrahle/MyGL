@@ -6,7 +6,7 @@ namespace MyGL.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required, Display(Name = "Account Name")]
+        [Required, Display(Name = "Account")]
         public string AccountName { get; set; }
         [Display(Name = "Header Row")]
         public bool HeaderRow { get; set; }
