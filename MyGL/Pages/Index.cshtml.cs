@@ -30,20 +30,29 @@ namespace MyGL.Pages
 
         public void OnGet()
         {
-            // DimDateController ddc = new(_context);
-            // ddc.Generate(DateTime.ParseExact("01/01/2016", "d/M/yyyy", CultureInfo.InvariantCulture), DateTime.ParseExact("31/12/2030", "d/M/yyyy", CultureInfo.InvariantCulture));
-
             foreach (Account account in _context.Accounts)
             {
-                Stats.Add(new Stat()
+                if (_context.Transactions.Where(t => t.Account == account).Count() > 0)
                 {
-                    Account = account,
-                    TransCount = _context.Transactions.Where(t => t.AccountId == account.Id).Count(),
-                    LatestTrans = _context.Transactions.Where(t => t.AccountId == account.Id)
-                        .OrderByDescending(t => t.Date).FirstOrDefault().Date.ToString("d/M/yyyy"),
-                    UncategorisedCount = _context.Transactions.Where(t => t.AccountId == account.Id && t.CategoryId == null).Count()
-                });
+                    Stats.Add(new Stat()
+                    {
+                        Account = account,
+                        TransCount = _context.Transactions.Where(t => t.AccountId == account.Id).Count(),
+                        LatestTrans = _context.Transactions.Where(t => t.AccountId == account.Id)
+                            .OrderByDescending(t => t.Date).FirstOrDefault().Date.ToString("d/M/yyyy"),
+                        UncategorisedCount = _context.Transactions.Where(t => t.AccountId == account.Id && t.CategoryId == null).Count()
+                    });                  
+                }
             }
+            // Add Total row
+            Stats.Add(new Stat()
+            {
+                Account = new Account() { AccountName = "Total" },
+                TransCount = _context.Transactions.Count(),
+                LatestTrans = _context.Transactions
+                            .OrderByDescending(t => t.Date).FirstOrDefault().Date.ToString("d/M/yyyy"),
+                UncategorisedCount = _context.Transactions.Where(t => t.CategoryId == null).Count()
+            });
         }
     }
 }

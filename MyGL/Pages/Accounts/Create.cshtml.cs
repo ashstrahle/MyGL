@@ -31,6 +31,15 @@ namespace MyGL.Pages.Accounts
                 return Page();
             }
 
+            if (Account.AmountColNo is null)
+            {
+                if (Account.CreditColNo is null || Account.DebitColNo is null)
+                {
+                    ModelState.AddModelError("Amount", "Either Amount or Credit and Debit must be defined");
+                    return Page();
+                }
+            }
+
             // Check for duplicates
 
             List<int> colNos = new List<int>();

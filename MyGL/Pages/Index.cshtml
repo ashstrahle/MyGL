@@ -30,21 +30,43 @@
     <tbody>
         @foreach (var item in Model.Stats)
         {
-            <tr>
-                <td>
-                    <a asp-page="/Accounts/Details" asp-route-id="@item.Account.Id">@item.Account.AccountName</a>
-                </td>
-                <td>
-                    @item.LatestTrans
-                </td>
-                <td>
-                    @item.TransCount
-                </td>
-                <td>
-                    <a asp-page="/Uncategorised/Index">  @item.UncategorisedCount</a>
-                </td>
-            </tr>
-        }
+            @if (item.Account.AccountName == "Total")
+                {
+                    <thead>
+                <tr>
+                    <th>
+                        Total
+                    </th>
+                    <th>
+                        @item.LatestTrans
+                    </th>
+                    <th>
+                        @item.TransCount
+                    </th>
+                    <th>
+                        <a asp-page="/Uncategorised/Index"> @item.UncategorisedCount</a>
+                    </th>
+                </tr>
+                        </thead>
+                }
+                else
+                {
+                    <tr>
+                        <td>
+                            <a asp-page="/Accounts/Details" asp-route-id="@item.Account.Id">@item.Account.AccountName</a>
+                        </td>
+                        <td>
+                            @item.LatestTrans
+                        </td>
+                        <td>
+                            @item.TransCount
+                        </td>
+                        <td>
+                            <a asp-page="/Uncategorised/Index"> @item.UncategorisedCount</a>
+                        </td>
+                    </tr>
+                }
+         }
     </tbody>
 </table>
  
