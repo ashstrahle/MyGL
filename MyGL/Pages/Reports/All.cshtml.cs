@@ -20,7 +20,7 @@ namespace MyGL.Pages.All
             _context = context;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
             // var data = GetPivotData();
             List<PivotData> data = _context.View_PivotData.ToList();

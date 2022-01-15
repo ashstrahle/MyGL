@@ -27,7 +27,7 @@ namespace MyGL.Pages.FY
         [Display(Name = "Financial Years")]
         public SelectList FYs { get; set; }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult>OnGetAsync()
         {
             List<PivotData> data = _context.View_PivotData.ToList();
             List<string> FYList = data.OrderByDescending(pd => pd.FinancialYear).Select(pd => pd.FinancialYear).Distinct().ToList();

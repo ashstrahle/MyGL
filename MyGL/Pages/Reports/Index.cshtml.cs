@@ -7,7 +7,7 @@ namespace MyGL.Pages.Reports.Index
 {
     public class IndexModel : PageModel
     {
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
             return Page();
         }
