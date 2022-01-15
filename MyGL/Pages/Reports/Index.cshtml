@@ -1,0 +1,16 @@
+@page
+@model MyGL.Pages.Reports.Index.IndexModel
+@{ ViewData["Title"] = "Reports"; }
+
+<h1>@ViewData["Title"]</h1>
+
+<li>
+    <a asp-page="./FY">Financial Year</a>
+</li>
+<li>
+    <a asp-page="./All">All</a>
+</li>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

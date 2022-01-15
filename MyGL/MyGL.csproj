@@ -34,7 +34,6 @@
     <Folder Include="wwwroot\lib\font-awesome\" />
     <Folder Include="Controllers\" />
     <Folder Include="Pages\Reports\" />
-    <Folder Include="Pages\Reports\Pivot\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Controllers\" />
@@ -42,6 +41,5 @@
     <None Remove="Syncfusion.Licensing" />
     <None Remove="Newtonsoft.Json" />
     <None Remove="Pages\Reports\" />
-    <None Remove="Pages\Reports\Pivot\" />
   </ItemGroup>
 </Project>
