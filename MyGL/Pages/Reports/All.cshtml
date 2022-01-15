@@ -6,7 +6,7 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<ejs-pivotview id="PivotView" height="1000" width="1500" enableVirtualization="true">
+<ejs-pivotview id="PivotView" height="1000" width="1500" ShowFieldList="true" enableVirtualization="true">
     <e-datasourcesettings dataSource="@ViewBag.DataSource" expandAll="false" enableSorting="true">
         <e-formatsettings>
             <e-field name="Amount" format="C0" maximumSignificantDigits="10" minimumSignificantDigits="1" useGrouping="true"></e-field>
