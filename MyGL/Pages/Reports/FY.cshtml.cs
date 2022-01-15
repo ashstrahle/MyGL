@@ -34,6 +34,7 @@ namespace MyGL.Pages.FY
             FYs = new SelectList(FYList);
             SelectedFY = FYList.First();
             ViewData["DataSource"] = data.Where(pd => pd.FinancialYear == FYList.First());
+            ViewData["DrilledMembers"] = data.Select(pd => pd.FinancialQuarterFormat).Distinct().ToArray();
             return Page();
         }
 
@@ -49,6 +50,7 @@ namespace MyGL.Pages.FY
             List<string> FYList = data.OrderByDescending(pd => pd.FinancialYear).Select(pd => pd.FinancialYear).Distinct().ToList();
             FYs = new SelectList(FYList);
             ViewData["DataSource"] = data.Where(pd => pd.FinancialYear == SelectedFY);
+            ViewData["DrilledMembers"] = data.Select(pd => pd.FinancialQuarterFormat).Distinct().ToArray();
             return Page();
         }
     }
