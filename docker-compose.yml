@@ -8,5 +8,4 @@ services:
       dockerfile: MyGL/Dockerfile
     ports: 
         - "9999:80"
-        - "4431:443"
     restart: always
