@@ -9,6 +9,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<MyGLContext>(options =>
    options.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("MyGLContext")), ServiceLifetime.Transient);
 
+builder.Configuration.AddEnvironmentVariables();
+
 // options.UseInMemoryDatabase("Account"));
 
 var app = builder.Build();
