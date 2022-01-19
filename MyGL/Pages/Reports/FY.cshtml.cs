@@ -27,6 +27,9 @@ namespace MyGL.Pages.FY
         [Display(Name = "Financial Years")]
         public SelectList FYs { get; set; }
 
+        [DataType(DataType.Date)]
+        public string LatestTrans{ get; set; }
+
         public async Task<IActionResult>OnGetAsync()
         {
             List<PivotData> data = _context.View_PivotData.ToList();
@@ -35,6 +38,7 @@ namespace MyGL.Pages.FY
             SelectedFY = FYList.First();
             ViewData["DataSource"] = data.Where(pd => pd.FinancialYear == FYList.First());
             ViewData["DrilledMembers"] = data.Select(pd => pd.FinancialQuarterFormat).Distinct().ToArray();
+            LatestTrans = _context.Transactions.OrderByDescending(t => t.Date).FirstOrDefault().Date.ToString("d/M/yyyy"); 
             return Page();
         }
 
@@ -51,6 +55,7 @@ namespace MyGL.Pages.FY
             FYs = new SelectList(FYList);
             ViewData["DataSource"] = data.Where(pd => pd.FinancialYear == SelectedFY);
             ViewData["DrilledMembers"] = data.Select(pd => pd.FinancialQuarterFormat).Distinct().ToArray();
+            LatestTrans = _context.Transactions.OrderByDescending(t => t.Date).FirstOrDefault().Date.ToString("d/M/yyyy");
             return Page();
         }
     }
