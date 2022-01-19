@@ -24,6 +24,8 @@ namespace MyGL.Pages.FY
         [BindProperty]
         public string SelectedFY { get; set; }
 
+        public List<string>FYList { get; set; }
+
         [Display(Name = "Financial Years")]
         public SelectList FYs { get; set; }
 
@@ -33,7 +35,7 @@ namespace MyGL.Pages.FY
         public async Task<IActionResult>OnGetAsync()
         {
             List<PivotData> data = _context.View_PivotData.ToList();
-            List<string> FYList = data.OrderByDescending(pd => pd.FinancialYear).Select(pd => pd.FinancialYear).Distinct().ToList();
+            FYList = data.OrderByDescending(pd => pd.FinancialYear).Select(pd => pd.FinancialYear).Distinct().ToList();
             FYs = new SelectList(FYList);
             SelectedFY = FYList.First();
             ViewData["DataSource"] = data.Where(pd => pd.FinancialYear == FYList.First());
@@ -51,7 +53,7 @@ namespace MyGL.Pages.FY
 
             string Selected = SelectedFY;
             List<PivotData> data = _context.View_PivotData.ToList();
-            List<string> FYList = data.OrderByDescending(pd => pd.FinancialYear).Select(pd => pd.FinancialYear).Distinct().ToList();
+            FYList = data.OrderByDescending(pd => pd.FinancialYear).Select(pd => pd.FinancialYear).Distinct().ToList();
             FYs = new SelectList(FYList);
             ViewData["DataSource"] = data.Where(pd => pd.FinancialYear == SelectedFY);
             ViewData["DrilledMembers"] = data.Select(pd => pd.FinancialQuarterFormat).Distinct().ToArray();
