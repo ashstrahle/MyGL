@@ -18,7 +18,7 @@
 </form>
 <br />
 <div>
-    <h3>@Model.SelectedFY</h3> as at @Model.LatestTrans
+    <h3>@Model.SelectedFY <h5>(as at @Model.LatestTrans)</h5></h3>
     <ejs-pivotview id="PivotView" height="1000" width="1500" ShowFieldList="true" enableVirtualization="true">
         <e-datasourcesettings dataSource="@ViewBag.DataSource" expandAll="false" enableSorting="true">
             <e-drilledmembers>
