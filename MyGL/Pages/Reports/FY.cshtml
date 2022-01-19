@@ -18,7 +18,7 @@
 </form>
 <br />
 <div>
-    <b>@Model.SelectedFY</b> (as at @Model.LatestTrans)
+    <b>@Model.SelectedFY</b> @if (Model.SelectedFY == Model.FYs.First().ToString()) { <span>as at @Model.LatestTrans"</span> }
     <ejs-pivotview id="PivotView" height="1000" width="1500" ShowFieldList="true" enableVirtualization="true">
         <e-datasourcesettings dataSource="@ViewBag.DataSource" expandAll="false" enableSorting="true">
             <e-drilledmembers>
