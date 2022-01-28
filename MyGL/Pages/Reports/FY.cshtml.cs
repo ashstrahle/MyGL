@@ -40,7 +40,7 @@ namespace MyGL.Pages.FY
             SelectedFY = FYList.First();
             ViewData["DataSource"] = data.Where(pd => pd.FinancialYear == FYList.First());
             ViewData["DrilledMembers"] = data.Select(pd => pd.FinancialQuarterFormat).Distinct().ToArray();
-            LatestTrans = _context.Transactions.OrderByDescending(t => t.Date).FirstOrDefault().Date.ToString("d/M/yyyy"); 
+            LatestTrans = _context.Transactions.OrderByDescending(t => t.Date).FirstOrDefault().Date.ToString("d/MM/yyyy"); 
             return Page();
         }
 
@@ -57,7 +57,7 @@ namespace MyGL.Pages.FY
             FYs = new SelectList(FYList);
             ViewData["DataSource"] = data.Where(pd => pd.FinancialYear == SelectedFY);
             ViewData["DrilledMembers"] = data.Select(pd => pd.FinancialQuarterFormat).Distinct().ToArray();
-            LatestTrans = _context.Transactions.OrderByDescending(t => t.Date).FirstOrDefault().Date.ToString("d/M/yyyy");
+            LatestTrans = _context.Transactions.OrderByDescending(t => t.Date).FirstOrDefault().Date.ToString("d/MM/yyyy");
             return Page();
         }
     }
