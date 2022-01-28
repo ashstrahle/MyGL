@@ -21,7 +21,8 @@ namespace MyGL.Pages
         public class Stat
         {
             public Account Account { get; set; }
-            public string LatestTrans { get; set; }
+            public string FromDate { get; set; }
+            public string ToDate { get; set; }
             public int TransCount { get; set; }
             public int UncategorisedCount { get; set; }
         }
@@ -38,8 +39,10 @@ namespace MyGL.Pages
                     {
                         Account = account,
                         TransCount = _context.Transactions.Where(t => t.AccountId == account.Id).Count(),
-                        LatestTrans = _context.Transactions.Where(t => t.AccountId == account.Id)
-                            .OrderByDescending(t => t.Date).FirstOrDefault().Date.ToString("d/MM/yyyy"),
+                        FromDate = _context.Transactions.Where(t => t.AccountId == account.Id)
+                            .OrderBy(t => t.Date).FirstOrDefault().Date.ToString("dd/MM/yyyy"),
+                        ToDate = _context.Transactions.Where(t => t.AccountId == account.Id)
+                            .OrderByDescending(t => t.Date).FirstOrDefault().Date.ToString("dd/MM/yyyy"),
                         UncategorisedCount = _context.Transactions.Where(t => t.AccountId == account.Id && t.CategoryId == null).Count()
                     });
                 }
@@ -51,8 +54,10 @@ namespace MyGL.Pages
                 {
                     Account = new Account() { AccountName = "Total" },
                     TransCount = _context.Transactions.Count(),
-                    LatestTrans = _context.Transactions
-                                .OrderByDescending(t => t.Date).FirstOrDefault().Date.ToString("d/MM/yyyy"),
+                    FromDate = _context.Transactions
+                            .OrderBy(t => t.Date).FirstOrDefault().Date.ToString("dd/MM/yyyy"),
+                    ToDate = _context.Transactions
+                                .OrderByDescending(t => t.Date).FirstOrDefault().Date.ToString("dd/MM/yyyy"),
                     UncategorisedCount = _context.Transactions.Where(t => t.CategoryId == null).Count()
                 });
             }

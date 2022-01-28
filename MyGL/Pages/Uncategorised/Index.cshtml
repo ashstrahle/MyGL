@@ -29,7 +29,7 @@
 @foreach (var item in Model.Transactions) {
         <tr>
             <td>
-               @item.Date.ToString("d/MM/yyyy")
+               @item.Date.ToString("dd/MM/yyyy")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Account.AccountName)
