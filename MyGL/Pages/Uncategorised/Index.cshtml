@@ -1,4 +1,5 @@
 ﻿@page
+@using System.Globalization
 @model MyGL.Pages.Uncategorised.IndexModel
 
 @{
@@ -29,7 +30,7 @@
 @foreach (var item in Model.Transactions) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Date)
+                @DateTime.ParseExact(item.Date.ToShortDateString(), "d/M/yyyy", CultureInfo.InvariantCulture).ToShortDateString()
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Account.AccountName)

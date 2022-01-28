@@ -20,7 +20,7 @@ namespace MyGL.Pages
 
         public class Stat
         {
-            public Account Account { get; set; }           
+            public Account Account { get; set; }
             public string LatestTrans { get; set; }
             public int TransCount { get; set; }
             public int UncategorisedCount { get; set; }
@@ -41,18 +41,21 @@ namespace MyGL.Pages
                         LatestTrans = _context.Transactions.Where(t => t.AccountId == account.Id)
                             .OrderByDescending(t => t.Date).FirstOrDefault().Date.ToString("d/M/yyyy"),
                         UncategorisedCount = _context.Transactions.Where(t => t.AccountId == account.Id && t.CategoryId == null).Count()
-                    });                  
+                    });
                 }
             }
-            // Add Total row
-            Stats.Add(new Stat()
+            if (_context.Accounts.Count() > 0)
             {
-                Account = new Account() { AccountName = "Total" },
-                TransCount = _context.Transactions.Count(),
-                LatestTrans = _context.Transactions
-                            .OrderByDescending(t => t.Date).FirstOrDefault().Date.ToString("d/M/yyyy"),
-                UncategorisedCount = _context.Transactions.Where(t => t.CategoryId == null).Count()
-            });
+                // Add Total row
+                Stats.Add(new Stat()
+                {
+                    Account = new Account() { AccountName = "Total" },
+                    TransCount = _context.Transactions.Count(),
+                    LatestTrans = _context.Transactions
+                                .OrderByDescending(t => t.Date).FirstOrDefault().Date.ToString("d/M/yyyy"),
+                    UncategorisedCount = _context.Transactions.Where(t => t.CategoryId == null).Count()
+                });
+            }
         }
     }
 }

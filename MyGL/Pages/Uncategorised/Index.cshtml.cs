@@ -20,10 +20,6 @@ namespace MyGL.Pages.Uncategorised
         public async Task OnGetAsync()
         {
             Transactions = await _context.Transactions.Where(t => t.CategoryId == null).OrderByDescending(t => t.Date).ToListAsync();
-            foreach (Transaction t in Transactions)
-            {
-                t.Date = DateTime.ParseExact(t.Date.ToString(), "d/M/yyyy", CultureInfo.InvariantCulture);
-            }
         }
     }
 }
