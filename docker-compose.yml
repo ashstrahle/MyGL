@@ -1,6 +1,16 @@
 version: '3.4'
 
 services:
+  db:
+   image: "mcr.microsoft.com/azure-sql-edge"
+   container_name: sql-server-db
+   ports:
+      - 1433:1433
+   environment:
+      - SA_PASSWORD=MyPass@word # PLEASE CHANGE
+      - MSSQL_PID=Developer
+      - ACCEPT_EULA='Y'
+
   mygl:
     image: ${DOCKER_REGISTRY-}mygl
     build:
@@ -9,3 +19,5 @@ services:
     ports: 
         - "9999:80"
     restart: always
+    depends_on: 
+        - db
