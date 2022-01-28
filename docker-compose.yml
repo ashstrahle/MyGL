@@ -3,7 +3,6 @@ version: '3.4'
 services:
   db:
    image: "mcr.microsoft.com/azure-sql-edge"
-   container_name: sql-server-db
    ports:
       - 1433:1433
    environment:
