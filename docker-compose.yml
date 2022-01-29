@@ -4,8 +4,8 @@ services:
   db:
     image: "mcr.microsoft.com/azure-sql-edge"
     user: root
-    ports:
-       - 1434:1433
+    #ports:
+    #   - 1434:1433
     environment:
        - SA_PASSWORD=mYgLP@s5w0rD # PLEASE CHANGE
        - MSSQL_PID=Developer
