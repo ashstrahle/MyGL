@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<MyGLContext>(options =>
-   options.UseSqlServer(connectionString: builder.Configuration.GetConnectionString("MyGLContext")), ServiceLifetime.Transient);
+   options.UseSqlServer(connectionString: builder.Configuration.GetConnectionString("MyGLContext"), providerOptions => providerOptions.EnableRetryOnFailure()), ServiceLifetime.Transient);
 
 var app = builder.Build();
 

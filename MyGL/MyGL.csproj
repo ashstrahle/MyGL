@@ -22,8 +22,8 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.1" />
-    <PackageReference Include="Syncfusion.EJ2.AspNet.Core" Version="19.4.0.42" />
-    <PackageReference Include="Syncfusion.Licensing" Version="19.4.0.42" />
+    <PackageReference Include="Syncfusion.EJ2.AspNet.Core" Version="19.4.0.47" />
+    <PackageReference Include="Syncfusion.Licensing" Version="19.4.0.47" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
