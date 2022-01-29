@@ -36,14 +36,10 @@
     <Folder Include="Pages\Reports\" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="appsettings.Development.json.old" />
     <None Remove="Controllers\" />
     <None Remove="Syncfusion.EJ2.AspNet.Core" />
     <None Remove="Syncfusion.Licensing" />
     <None Remove="Newtonsoft.Json" />
     <None Remove="Pages\Reports\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="appsettings.Development.json.old" />
   </ItemGroup>
 </Project>
