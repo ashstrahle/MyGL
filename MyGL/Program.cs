@@ -30,8 +30,13 @@ if (!app.Environment.IsDevelopment())
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<MyGLContext>();
+
+    // Retry connection to database until it's up
+    int retryCount = 0;
     while (!db.Database.CanConnect())
     {
+        retryCount++;
+        Console.WriteLine("Connecting to database. Retry: " + retryCount);
         Thread.Sleep(10000);
     }
     db.Database.Migrate();
