@@ -28,6 +28,6 @@ jobs:
         working-directory: ${{env.GITHUB_WORKSPACE}}
         run: |
           sudo docker-compose down
-          if test -f "~/mygl.conf.d/docker-compose.override.yml"; then cp -f ~/mygl.conf.d/docker-compose.override.yml . ; fi
+          if [[ -f ~/mygl.conf.d/docker-compose.override.yml ]] ; then cp -f ~/mygl.conf.d/docker-compose.override.yml . ; fi
           sudo docker-compose build
           sudo docker-compose up -d
