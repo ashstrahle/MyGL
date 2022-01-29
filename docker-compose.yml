@@ -24,6 +24,6 @@ services:
        - "9999:80"
     restart: always
     depends_on: 
-       - db
+       - db:mygldb.localhost
 volumes:
     data:
