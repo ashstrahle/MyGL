@@ -10,7 +10,7 @@ services:
        - MSSQL_PID=Developer
        - ACCEPT_EULA='Y'
     volumes: 
-       - sqlsystem:/var/opt/mssql/.system
+       - sqlsystem:/var/opt/mssql
        - sqldata:/var/opt/mssql/data
        - sqllog:/var/opt/mssql/log
 
