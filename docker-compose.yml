@@ -7,7 +7,7 @@ services:
     ports:
        - 1434:1433
     environment:
-       - SA_PASSWORD=MyPass@word # PLEASE CHANGE
+       - SA_PASSWORD=mYgLP@s5w0rD # PLEASE CHANGE
        - MSSQL_PID=Developer
        - ACCEPT_EULA='Y'
     volumes:
