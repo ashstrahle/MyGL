@@ -7,7 +7,9 @@ services:
     ports:
        - 1434:1433
     networks:
-       - mygl_net
+      default:
+        aliases:
+          - dbserver
     environment:
        - SA_PASSWORD=mYgLP@s5w0rD # PLEASE CHANGE
        - MSSQL_PID=Developer
@@ -24,12 +26,8 @@ services:
       dockerfile: MyGL/Dockerfile
     ports: 
        - "9999:80"
-    networks:
-       - mygl_net
     restart: always
     depends_on: 
        - db
 volumes:
     data:
-networks:
-    mygl_net:
