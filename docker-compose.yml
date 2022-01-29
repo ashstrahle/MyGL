@@ -10,7 +10,10 @@ services:
        - SA_PASSWORD=MyPass@word # PLEASE CHANGE
        - MSSQL_PID=Developer
        - ACCEPT_EULA='Y'
-    volumes: []
+    volumes:
+       - type: volume
+         source: data
+         # target: /var/opt/mssql
 
   mygl:
     image: ${DOCKER_REGISTRY-}mygl
@@ -22,3 +25,5 @@ services:
     restart: always
     depends_on: 
        - db
+volumes:
+    data:  
