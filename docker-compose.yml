@@ -10,6 +10,7 @@ services:
        - SA_PASSWORD=MyPass@word # PLEASE CHANGE
        - MSSQL_PID=Developer
        - ACCEPT_EULA='Y'
+    volumes: []
 
   mygl:
     image: ${DOCKER_REGISTRY-}mygl
