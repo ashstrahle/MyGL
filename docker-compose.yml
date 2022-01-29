@@ -3,7 +3,7 @@ version: '3.4'
 services:
   db:
     image: "mcr.microsoft.com/azure-sql-edge"
-    user: root
+    # user: root
     ports:
        - 1434:1433
     environment:
@@ -12,7 +12,7 @@ services:
        - ACCEPT_EULA='Y'
     volumes: 
         - type: volume
-          source: sql_data
+          source: sqldata
           target: /var/opt/mssql
 
   mygl:
@@ -27,4 +27,4 @@ services:
        - db
 
 volumes:
-  sql_data:
+  sqldata:
