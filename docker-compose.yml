@@ -3,7 +3,7 @@ version: '3.4'
 services:
   db:
     image: "mcr.microsoft.com/azure-sql-edge"
-    # user: root
+    user: root
     ports:
        - 1434:1433
     environment:
@@ -13,7 +13,7 @@ services:
     volumes:
        - type: volume
          source: data
-         # target: /var/opt/mssql
+         target: /var/opt/mssql
 
   mygl:
     image: ${DOCKER_REGISTRY-}mygl
