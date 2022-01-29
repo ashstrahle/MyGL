@@ -12,7 +12,7 @@ services:
        - ACCEPT_EULA='Y'
     volumes: 
         - type: volume
-          source: data
+          source: sql_data
           target: /var/opt/mssql
 
   mygl:
@@ -27,4 +27,4 @@ services:
        - db
 
 volumes:
-  data:
+  sql_data:
