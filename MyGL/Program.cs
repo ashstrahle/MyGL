@@ -9,8 +9,6 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<MyGLContext>(options =>
    options.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("MyGLContext")), ServiceLifetime.Transient);
 
-// options.UseInMemoryDatabase("Account"));
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -21,7 +19,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
