@@ -19,6 +19,13 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+// Apply Migrations
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<MyGLContext>();
+    db.Database.Migrate();
+}
+
 // app.UseHttpsRedirection();
 app.UseStaticFiles();
 
