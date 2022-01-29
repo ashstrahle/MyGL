@@ -9,6 +9,7 @@
     <DockerServiceName>mygl</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="appsettings.json.old" />
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>
