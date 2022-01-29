@@ -6,6 +6,10 @@ services:
     user: root
     ports:
        - 1434:1433
+    networks:
+      platform:
+        aliases:
+           - mygldb.localhost
     environment:
        - SA_PASSWORD=mYgLP@s5w0rD # PLEASE CHANGE
        - MSSQL_PID=Developer
@@ -24,6 +28,6 @@ services:
        - "9999:80"
     restart: always
     depends_on: 
-       - db:mygldb.localhost
+       - db
 volumes:
     data:
