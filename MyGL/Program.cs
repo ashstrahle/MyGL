@@ -26,6 +26,12 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+using var loggerFactory = LoggerFactory.Create(loggingBuilder => loggingBuilder
+    .SetMinimumLevel(LogLevel.Trace)
+    .AddConsole());
+
+ILogger logger = loggerFactory.CreateLogger<Program>();
+
 // Apply Migrations
 using (var scope = app.Services.CreateScope())
 {
@@ -36,7 +42,7 @@ using (var scope = app.Services.CreateScope())
     while (!db.Database.CanConnect())
     {
         retryCount++;
-        Console.WriteLine("Connecting to database. Retry: " + retryCount);
+        logger.LogInformation("Connecting to database. Retry: " + retryCount);
         Thread.Sleep(10000);
     }
     db.Database.Migrate();
