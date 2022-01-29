@@ -23,8 +23,6 @@ services:
     ports: 
        - "9999:80"
     restart: always
-    extra_hosts:
-    - "host.docker.internal:host-gateway"
     depends_on: 
        - db
 volumes:
