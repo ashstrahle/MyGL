@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyGL.Data;
+using System.Net.NetworkInformation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,12 +38,14 @@ using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<MyGLContext>();
 
-    // Retry connection to database until it's up
+    // Check database server is up
+    Ping ping = new();
+    PingReply reply = ping.Send("db");
     int retryCount = 0;
-    while (!db.Database.CanConnect())
+    while (reply.Status != IPStatus.Success)
     {
         retryCount++;
-        logger.LogInformation("Connecting to database. Retry: " + retryCount);
+        logger.LogInformation(message: "Ping database server failed. Retry: " + retryCount);
         Thread.Sleep(10000);
     }
     db.Database.Migrate();
