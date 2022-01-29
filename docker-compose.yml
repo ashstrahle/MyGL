@@ -11,9 +11,9 @@ services:
        - MSSQL_PID=Developer
        - ACCEPT_EULA='Y'
     volumes: 
-       - sqlsystem:/var/opt/mssql
-       - sqldata:/var/opt/mssql/data
-       - sqllog:/var/opt/mssql/log
+        - type: volume
+          source: data
+          target: /var/opt/mssql
 
   mygl:
     image: ${DOCKER_REGISTRY-}mygl
@@ -27,6 +27,4 @@ services:
        - db
 
 volumes:
-  sqlsystem:
-  sqldata:
-  sqllog:
+  data:
