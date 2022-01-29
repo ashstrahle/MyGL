@@ -2,13 +2,17 @@ version: '3.4'
 
 services:
   db:
-   image: "mcr.microsoft.com/azure-sql-edge"
-   ports:
-      - 1434:1433
-   environment:
-      - SA_PASSWORD=MyPass@word # PLEASE CHANGE
-      - MSSQL_PID=Developer
-      - ACCEPT_EULA='Y'
+    image: "mcr.microsoft.com/azure-sql-edge"
+    ports:
+       - 1434:1433
+    environment:
+       - SA_PASSWORD=MyPass@word # PLEASE CHANGE
+       - MSSQL_PID=Developer
+       - ACCEPT_EULA='Y'
+    volumes: 
+       - sqlsystem:/var/opt/mssql/.system
+       - sqldata:/var/opt/mssql/data
+       - sqllog:/var/opt/mssql/log
 
   mygl:
     image: ${DOCKER_REGISTRY-}mygl
@@ -16,7 +20,12 @@ services:
       context: .
       dockerfile: MyGL/Dockerfile
     ports: 
-        - "9999:80"
+       - "9999:80"
     restart: always
     depends_on: 
-        - db
+       - db
+
+volumes:
+  sqlsystem:
+  sqldata:
+  sqllog:
