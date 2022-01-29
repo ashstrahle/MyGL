@@ -6,10 +6,6 @@ services:
     user: root
     ports:
        - 1434:1433
-    networks:
-      default:
-        aliases:
-          - dbserver
     environment:
        - SA_PASSWORD=mYgLP@s5w0rD # PLEASE CHANGE
        - MSSQL_PID=Developer
