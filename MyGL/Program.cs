@@ -74,6 +74,7 @@ using (var scope = app.Services.CreateScope())
             };
             db.Categories.Add(category);
         }
+        db.SaveChanges();
 
         // Add Default Conditions to database
         foreach (var defaultcondition in Constants.DefaultCategoryConditions)
