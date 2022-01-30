@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using MyGL.Data;
 using System.Net.NetworkInformation;
 
@@ -38,9 +39,13 @@ using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<MyGLContext>();
 
+    SqlConnectionStringBuilder sqlbuilder = new SqlConnectionStringBuilder(builder.Configuration.GetConnectionString("MyGLContext"));
+    // Retrieve the SQL server from connection string    
+    string sqlserver = sqlbuilder.DataSource;
+
     // Check database server is up
     Ping ping = new();
-    PingReply reply = ping.Send("db");
+    PingReply reply = ping.Send(sqlserver);
     int retryCount = 0;
     while (reply.Status != IPStatus.Success)
     {
