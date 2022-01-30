@@ -85,6 +85,7 @@ using (var scope = app.Services.CreateScope())
                 SearchString = defaultcondition.Item1,
                 CategoryId = id
             };
+            db.CategoryConditions.Add(condition);
         }
         db.SaveChanges();
     }
