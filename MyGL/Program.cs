@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Collections.ObjectModel;
+using Microsoft.EntityFrameworkCore;
 using MyGL.Data;
 using MyGL.Models;
 
@@ -61,14 +62,10 @@ using (var scope = app.Services.CreateScope())
         }
     }
     // Add Default categories in there are none
-    var DefaultCategories = new List<(string, string)>
-            {
-                ("groceries", "groceries")
-            };
     if (db.Categories.Count() == 0)
     {
         // Add Default Categories to database
-        foreach (var defaultcategory in DefaultCategories)
+        foreach (var defaultcategory in Constants.DefaultCategories)
         {
             Category category = new()
             {
@@ -76,6 +73,17 @@ using (var scope = app.Services.CreateScope())
                 SubCategory = defaultcategory.Item2
             };
             db.Categories.Add(category);
+        }
+
+        // Add Default Conditions to database
+        foreach (var defaultcondition in Constants.DefaultCategoryConditions)
+        {
+            int id = db.Categories.Where(c => c.CategorySubCategory == defaultcondition.Item2).FirstOrDefault().Id;
+            CategoryCondition condition = new()
+            {
+                SearchString = defaultcondition.Item1,
+                CategoryId = id
+            };
         }
         db.SaveChanges();
     }
