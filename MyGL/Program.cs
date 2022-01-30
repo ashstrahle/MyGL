@@ -47,7 +47,7 @@ using (var scope = app.Services.CreateScope())
             db.Database.Migrate();
             connected = true;
         }
-        catch (Exception e)
+        catch
         {
             logger.LogInformation(message: "No connection to database. Retry: " + retryCount);
             Thread.Sleep(10000);
