@@ -80,13 +80,14 @@ using (var scope = app.Services.CreateScope())
         db.SaveChanges();
     }
 
-// app.UseHttpsRedirection();
-app.UseStaticFiles();
+    // app.UseHttpsRedirection();
+    app.UseStaticFiles();
 
-app.UseRouting();
+    app.UseRouting();
 
-app.UseAuthorization();
+    app.UseAuthorization();
 
-app.MapRazorPages();
+    app.MapRazorPages();
 
-app.Run();
+    app.Run();
+}
