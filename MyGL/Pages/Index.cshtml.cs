@@ -31,6 +31,11 @@ namespace MyGL.Pages
 
         public void OnGet()
         {
+            var DefaultCategories = new List<(string, string)>
+            {
+                ("groceries", "groceries")
+            };
+
             foreach (Account account in _context.Accounts)
             {
                 if (_context.Transactions.Where(t => t.Account == account).Count() > 0)
@@ -60,6 +65,20 @@ namespace MyGL.Pages
                                 .OrderByDescending(t => t.Date).FirstOrDefault().Date.ToString("dd/MM/yyyy"),
                     UncategorisedCount = _context.Transactions.Where(t => t.CategoryId == null).Count()
                 });
+            }
+            else if (_context.Categories.Count() == 0)
+            {
+                // Add Default Categories to database
+                foreach (var defaultcategory in DefaultCategories)
+                {
+                    Category category = new()
+                    {
+                        CategoryName = defaultcategory.Item1,
+                        SubCategory = defaultcategory.Item2
+                    };
+                    _context.Categories.Add(category);
+                }
+                _context.SaveChanges();
             }
         }
     }
