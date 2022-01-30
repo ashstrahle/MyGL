@@ -38,13 +38,27 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<MyGLContext>();
 
     int retryCount = 0;
-    while (!db.Database.EnsureCreated())
+    bool connected = false;
+    while (!connected)
     {
-        retryCount++;
-        logger.LogInformation(message: "No connection to database. Retry: " + retryCount);
-        Thread.Sleep(10000);
+        try
+        {
+            retryCount++;
+            db.Database.Migrate();
+            connected = true;
+        }
+        catch (Exception e)
+        {
+            logger.LogInformation(message: "No connection to database. Retry: " + retryCount);
+            Thread.Sleep(10000);
+            connected = false;
+            if (retryCount > 10)
+            {
+                // Give up
+                System.Environment.Exit(1);
+            }
+        }
     }
-    db.Database.Migrate();
 }
 
 // app.UseHttpsRedirection();
