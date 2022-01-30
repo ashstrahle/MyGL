@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyGL.Data;
+using MyGL.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,7 +60,25 @@ using (var scope = app.Services.CreateScope())
             }
         }
     }
-}
+    // Add Default categories in there are none
+    var DefaultCategories = new List<(string, string)>
+            {
+                ("groceries", "groceries")
+            };
+    if (db.Categories.Count() == 0)
+    {
+        // Add Default Categories to database
+        foreach (var defaultcategory in DefaultCategories)
+        {
+            Category category = new()
+            {
+                CategoryName = defaultcategory.Item1,
+                SubCategory = defaultcategory.Item2
+            };
+            db.Categories.Add(category);
+        }
+        db.SaveChanges();
+    }
 
 // app.UseHttpsRedirection();
 app.UseStaticFiles();
