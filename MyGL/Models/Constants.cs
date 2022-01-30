@@ -21,8 +21,7 @@ namespace MyGL.Models
 			("Lifestyle", "Food"),
 			("Medical", "Medical"),
 			("Rent", "Bond"),
-			("Rent", "Rent"),
-
+			("Rent", "Rent")
 		});
 
 		public static readonly ReadOnlyCollection<(string, string)> DefaultCategoryConditions = new(new[]

@@ -78,7 +78,7 @@ using (var scope = app.Services.CreateScope())
         // Add Default Conditions to database
         foreach (var defaultcondition in Constants.DefaultCategoryConditions)
         {
-            int id = db.Categories.Where(c => c.CategorySubCategory == defaultcondition.Item2).FirstOrDefault().Id;
+            int id = db.Categories.Where(c => c.SubCategory == defaultcondition.Item2).FirstOrDefault().Id;
             CategoryCondition condition = new()
             {
                 SearchString = defaultcondition.Item1,
