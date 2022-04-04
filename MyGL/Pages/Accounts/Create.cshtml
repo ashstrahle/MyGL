@@ -26,10 +26,16 @@
             </div>
             <br />
             <div class="form-group">
+                <label asp-for="Account.DateFormat" class="control-label"></label>
+                @Html.DropDownListFor(m => m.Account.DateFormat, new SelectList(Model.DateFormatList))
+                <span asp-validation-for="Account.DateFormat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Account.DateColNo" class="control-label"></label>
                 <input asp-for="Account.DateColNo" class="form-control" />
                 <span asp-validation-for="Account.DateColNo" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <label asp-for="Account.DescriptionColNo" class="control-label"></label>
                 <input asp-for="Account.DescriptionColNo" class="form-control" />

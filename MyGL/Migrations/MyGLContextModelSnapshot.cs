@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyGL.Data;
-using MyGL.Models;
 
 #nullable disable
 
@@ -18,7 +17,7 @@ namespace MyGL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.1")
+                .HasAnnotation("ProductVersion", "6.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -46,6 +45,10 @@ namespace MyGL.Migrations
 
                     b.Property<int>("DateColNo")
                         .HasColumnType("int");
+
+                    b.Property<string>("DateFormat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("DebitColNo")
                         .HasColumnType("int");
@@ -207,10 +210,10 @@ namespace MyGL.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<decimal?>("Balance")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -226,6 +229,43 @@ namespace MyGL.Migrations
                     b.ToTable("LoadTable");
                 });
 
+            modelBuilder.Entity("MyGL.Models.PivotData", b =>
+                {
+                    b.Property<string>("AccountName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FinancialQuarterFormat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FinancialYear")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MonthNameShortFormat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubCategory")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("View_PivotData");
+                });
+
             modelBuilder.Entity("MyGL.Models.Transaction", b =>
                 {
                     b.Property<int>("Id")
@@ -238,32 +278,32 @@ namespace MyGL.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<decimal?>("Balance")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Credit")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Debit")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<decimal>("DebitAmount")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("GST")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,4)");
 
                     b.HasKey("Id");
 
@@ -312,14 +352,6 @@ namespace MyGL.Migrations
 
                     b.Navigation("Category");
                 });
-
-
-            modelBuilder.Entity<PivotData>(d =>
-            {
-                d.HasNoKey();
-                d.ToView("View_PivotData");
-            });
-
 #pragma warning restore 612, 618
         }
     }

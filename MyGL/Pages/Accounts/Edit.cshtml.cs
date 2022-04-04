@@ -15,6 +15,8 @@ namespace MyGL.Pages.Accounts
             _context = context;
         }
 
+        public readonly List<string> DateFormatList = Constants.DateFormatList;
+
         [BindProperty]
         public Account Account { get; set; }
 

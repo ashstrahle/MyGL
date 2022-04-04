@@ -5,6 +5,15 @@ namespace MyGL.Models
 {
 	public class Constants
 	{
+		public static readonly List<string> DateFormatList = new()
+		{
+			"d/M/yyyy",
+			"d/M/yy",
+			"yyyy/M/d",
+			"M/d/yyyy",
+			"M/d/yy"
+		};
+
 		public static readonly ReadOnlyCollection<(string, string)> DefaultCategories = new(new[]
 		{
 			("Bill", "Electricity"),

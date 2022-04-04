@@ -20,6 +20,8 @@ namespace MyGL.Pages.Accounts
             return Page();
         }
 
+        public readonly List<string> DateFormatList = Constants.DateFormatList;
+
         [BindProperty]
         public Account Account { get; set; }
 
