@@ -263,7 +263,7 @@ namespace MyGL.Migrations
                     b.Property<string>("SubCategory")
                         .HasColumnType("nvarchar(max)");
 
-                    b.ToView("PivotData");
+                    b.ToView("view_PivotData");
                 });
 
             modelBuilder.Entity("MyGL.Models.Transaction", b =>

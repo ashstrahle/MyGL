@@ -1,12 +1,15 @@
 ﻿#nullable disable
 using Microsoft.EntityFrameworkCore;
+using MyGL.Models;
 
 namespace MyGL.Data
 {
     public class MyGLContext : DbContext
     {
+        private readonly DbSet<PivotData> view_PivotData1;
+
         public MyGLContext(DbContextOptions<MyGLContext> options)
-            : base(options)
+: base(options)
         {
         }
 
@@ -16,6 +19,6 @@ namespace MyGL.Data
         public DbSet<Models.LoadTable> LoadTable { get; set; }
         public DbSet<Models.Transaction> Transactions { get; set; }
         public DbSet<Models.DimDate> DimDates { get; set; }
-        public DbSet<Models.PivotData> view_PivotData { get; set; }
+        public virtual DbSet<Models.PivotData> view_PivotData { get; set; }
     }
 }
