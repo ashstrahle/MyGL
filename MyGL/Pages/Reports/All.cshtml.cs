@@ -31,7 +31,12 @@ namespace MyGL.Pages.All
         public async Task<IActionResult> OnGetAsync()
         {
             // var data = GetPivotData();
-            List<PivotData> data = _context.View_PivotData.ToList();
+            List<PivotData> data = _context.view_PivotData.ToList();
+            if (data.Count() == 0)
+            {
+                ModelState.AddModelError("Error", "No data");
+                return RedirectToPage("./Index");
+            }
             ViewData["DataSource"] = data;
             FromDate = _context.Transactions.OrderBy(t => t.Date).FirstOrDefault().Date.ToString("dd/MM/yyyy");
             ToDate = _context.Transactions.OrderByDescending(t => t.Date).FirstOrDefault().Date.ToString("dd/MM/yyyy");

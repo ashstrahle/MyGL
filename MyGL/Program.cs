@@ -8,15 +8,18 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+//builder.Services.AddDbContext<MyGLContext>(options =>
+//   options.UseSqlServer(builder.Configuration.GetConnectionString("MyGLContext"),
+//   sqlServerOptionsAction: sqlOptions =>
+//   {
+//       sqlOptions.EnableRetryOnFailure(
+//           maxRetryCount: 3,
+//           maxRetryDelay: TimeSpan.FromSeconds(30),
+//           errorNumbersToAdd: null);
+//   }));
+
 builder.Services.AddDbContext<MyGLContext>(options =>
-   options.UseSqlServer(builder.Configuration.GetConnectionString("MyGLContext"),
-   sqlServerOptionsAction: sqlOptions =>
-   {
-       sqlOptions.EnableRetryOnFailure(
-           maxRetryCount: 10,
-           maxRetryDelay: TimeSpan.FromSeconds(30),
-           errorNumbersToAdd: null);
-   }));
+   options.UseSqlServer(builder.Configuration.GetConnectionString("MyGLContext")));
 
 var app = builder.Build();
 
@@ -38,7 +41,6 @@ ILogger logger = loggerFactory.CreateLogger<Program>();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<MyGLContext>();
-
     int retryCount = 0;
     bool connected = false;
     while (!connected)
@@ -46,6 +48,7 @@ using (var scope = app.Services.CreateScope())
         try
         {
             retryCount++;
+            db.Database.EnsureCreated();
             db.Database.Migrate();
             connected = true;
         }

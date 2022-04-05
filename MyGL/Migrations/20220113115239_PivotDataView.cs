@@ -4,12 +4,12 @@
 
 namespace MyGL.Migrations
 {
-    public partial class PivotDataView : Migration
+    public partial class PivotData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.Sql(@"
-                create view View_PivotData as
+                create view view_PivotData as
                 select
                 a.AccountName
                 , t.Date
@@ -29,7 +29,7 @@ namespace MyGL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.Sql(@"
-                drop view View_PivotData");
+                drop view view_PivotData");
         }
     }
 }

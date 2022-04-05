@@ -16,6 +16,6 @@ namespace MyGL.Data
         public DbSet<Models.LoadTable> LoadTable { get; set; }
         public DbSet<Models.Transaction> Transactions { get; set; }
         public DbSet<Models.DimDate> DimDates { get; set; }
-        public DbSet<Models.PivotData> View_PivotData { get; set; }
+        public DbSet<Models.PivotData> view_PivotData { get; set; }
     }
 }
