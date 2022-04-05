@@ -20,6 +20,9 @@
                 @Html.DisplayNameFor(model => model.Account[0].HeaderRow)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Account[0].DateFormat)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Account[0].DateColNo)
             </th>
             <th>
@@ -49,6 +52,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HeaderRow)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateFormat)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateColNo)

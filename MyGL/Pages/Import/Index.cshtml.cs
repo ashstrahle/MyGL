@@ -86,8 +86,13 @@ namespace MyGL.Pages.Import
                                 try
                                 {
                                     record.AccountId = Account.Id;
-                                    record.Date = DateTime.ParseExact(vars[(int)Account.DateColNo - 1], "d/M/yyyy", CultureInfo.InvariantCulture);
+
+                                    // Remove time if it exists and replace "-" with "/"
+                                    string inDate = vars[(int)Account.DateColNo - 1].Split(" ")[0].Replace("-", "/");
+                                    record.Date = DateTime.ParseExact(inDate, Account.DateFormat, CultureInfo.InvariantCulture);
+
                                     record.Description = vars[Account.DescriptionColNo - 1];
+
                                     if (Account.AmountColNo is not null)
                                     {
                                         record.Amount = decimal.Parse(vars[(int)Account.AmountColNo - 1]);

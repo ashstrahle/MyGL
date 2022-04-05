@@ -13,7 +13,7 @@ namespace MyGL.Migrations
 {
     [DbContext(typeof(MyGLContext))]
     [Migration("20220113115239_PivotDataView")]
-    partial class PivotDataView
+    partial class PivotData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -226,6 +226,43 @@ namespace MyGL.Migrations
 
                     b.ToTable("LoadTable");
                 });
+
+            modelBuilder.Entity("MyGL.Models.PivotData", b =>
+            {
+                b.Property<string>("AccountName")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<decimal>("Amount")
+                    .HasColumnType("decimal(18,4)");
+
+                b.Property<string>("CategoryName")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<DateTime>("Date")
+                    .HasColumnType("datetime2");
+
+                b.Property<string>("Description")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("FinancialQuarterFormat")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("FinancialYear")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("MonthNameShortFormat")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("SubCategory")
+                    .HasColumnType("nvarchar(max)");
+
+                b.ToView("PivotData");
+            });
 
             modelBuilder.Entity("MyGL.Models.Transaction", b =>
                 {

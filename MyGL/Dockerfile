@@ -12,6 +12,7 @@ RUN dotnet restore "MyGL/MyGL.csproj"
 COPY . .
 WORKDIR "/src/MyGL"
 RUN dotnet build "MyGL.csproj" -c Release -o /app/build
+RUN dotnet ef database update
 
 FROM build AS publish
 RUN dotnet publish "MyGL.csproj" -c Release -o /app/publish

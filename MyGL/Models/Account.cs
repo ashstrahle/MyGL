@@ -10,6 +10,8 @@ namespace MyGL.Models
         public string AccountName { get; set; }
         [Display(Name = "Header Row")]
         public bool HeaderRow { get; set; }
+        [Required, Display(Name = "Date Format")]
+        public string DateFormat { get; set; }
         [Required, Display(Name = "Date Column Number"), Range(1, 10)]
         public int DateColNo { get; set; }
         [Required, Display(Name = "Description Column Number"), Range(1, 10)]

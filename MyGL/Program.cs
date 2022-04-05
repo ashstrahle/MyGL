@@ -9,14 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<MyGLContext>(options =>
-   options.UseSqlServer(builder.Configuration.GetConnectionString("MyGLContext"),
-   sqlServerOptionsAction: sqlOptions =>
-   {
-       sqlOptions.EnableRetryOnFailure(
-           maxRetryCount: 10,
-           maxRetryDelay: TimeSpan.FromSeconds(30),
-           errorNumbersToAdd: null);
-   }));
+   options.UseSqlServer(builder.Configuration.GetConnectionString("MyGLContext")));
 
 var app = builder.Build();
 
@@ -34,11 +27,11 @@ using var loggerFactory = LoggerFactory.Create(loggingBuilder => loggingBuilder
 
 ILogger logger = loggerFactory.CreateLogger<Program>();
 
-// Apply Migrations
+
+// Connect to/create database
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<MyGLContext>();
-
     int retryCount = 0;
     bool connected = false;
     while (!connected)
@@ -46,7 +39,10 @@ using (var scope = app.Services.CreateScope())
         try
         {
             retryCount++;
-            db.Database.Migrate();
+            db.Database.EnsureCreated();
+            // Known bug applying migrations via Program.cs - View gets created as table causing application
+            // unable to start. Migrations applied via Dockerfile.
+            // db.Database.Migrate();
             connected = true;
         }
         catch
