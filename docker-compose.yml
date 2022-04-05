@@ -5,7 +5,7 @@ services:
     image: "mcr.microsoft.com/azure-sql-edge"
     user: root
     ports:
-       - 1433:1433
+       - 1434:1433
     restart: always
     environment:
        - SA_PASSWORD=mYgLP@s5w0rD # PLEASE CHANGE
