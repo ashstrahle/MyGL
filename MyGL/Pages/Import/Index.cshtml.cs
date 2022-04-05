@@ -43,8 +43,7 @@ namespace MyGL.Pages.Import
 
         public async Task<IActionResult> OnPostAsync()
         {
-            int linecount = 0;
-
+            int totalLineCount = 0;
             Account = await _context.Accounts.FirstOrDefaultAsync(m => m.Id == Account.Id);
             ViewData["AccountList"] = new SelectList(_context.Accounts, "Id", "AccountName");
 
@@ -64,6 +63,7 @@ namespace MyGL.Pages.Import
 
             foreach (var file in CSVFiles)
             {
+                int lineCount = 0;
                 // Clear load table
                 _context.LoadTable.RemoveRange(_context.LoadTable);
                 _context.SaveChanges();
@@ -77,8 +77,8 @@ namespace MyGL.Pages.Import
                         while (reader.Peek() >= 0)
                         {
                             var line = reader.ReadLine().Replace("\"", "");
-                            linecount++;
-                            if (!(Account.HeaderRow == true && linecount == 1) && line.Length > 0)
+                            lineCount++;
+                            if (!(Account.HeaderRow == true && lineCount == 1) && line.Length > 0)
                             {
                                 LoadTable record = new();
                                 // Recreate line with quotes
@@ -116,6 +116,7 @@ namespace MyGL.Pages.Import
                             }
                         }
                     }
+                    totalLineCount += lineCount;
                     _context.SaveChanges();
                     etlController.ExtractLoad();
                 }
@@ -123,7 +124,7 @@ namespace MyGL.Pages.Import
 
             etlController.Transform();
 
-            ViewData["Info"] = "Read " + linecount + " lines";
+            ViewData["Info"] = "Read " + totalLineCount + " lines";
             return Page();
         }
     }

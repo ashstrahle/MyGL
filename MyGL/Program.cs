@@ -40,8 +40,6 @@ using (var scope = app.Services.CreateScope())
         {
             retryCount++;
             db.Database.EnsureCreated();
-            // Known bug applying migrations via Program.cs - View gets created as table causing application
-            // unable to start. Migrations applied via Dockerfile.
             db.Database.Migrate();
             connected = true;
         }
