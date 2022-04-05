@@ -27,7 +27,6 @@ using var loggerFactory = LoggerFactory.Create(loggingBuilder => loggingBuilder
 
 ILogger logger = loggerFactory.CreateLogger<Program>();
 
-
 // Connect to/create database
 using (var scope = app.Services.CreateScope())
 {
@@ -39,13 +38,12 @@ using (var scope = app.Services.CreateScope())
         try
         {
             retryCount++;
-            db.Database.EnsureCreated();
             db.Database.Migrate();
             connected = true;
         }
-        catch
+        catch (Exception ex)
         {
-            logger.LogInformation(message: "No connection to database. Retry: " + retryCount);
+            logger.LogError(message: ex.Message + " Retry: " + retryCount);
             Thread.Sleep(10000);
             connected = false;
             if (retryCount > 10)
