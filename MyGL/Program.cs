@@ -42,7 +42,7 @@ using (var scope = app.Services.CreateScope())
             db.Database.EnsureCreated();
             // Known bug applying migrations via Program.cs - View gets created as table causing application
             // unable to start. Migrations applied via Dockerfile.
-            // db.Database.Migrate();
+            db.Database.Migrate();
             connected = true;
         }
         catch
