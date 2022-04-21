@@ -6,7 +6,7 @@ namespace MyGL.Data
 {
     public class MyGLContext : DbContext
     {
-        private readonly DbSet<PivotData> view_PivotData1;
+       // private readonly DbSet<PivotData> view_PivotData1;
 
         public MyGLContext(DbContextOptions<MyGLContext> options)
 : base(options)
