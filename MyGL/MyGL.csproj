@@ -25,6 +25,8 @@
     <PackageReference Include="Syncfusion.EJ2.AspNet.Core" Version="20.1.0.47" />
     <PackageReference Include="Syncfusion.Licensing" Version="20.1.0.47" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,5 +45,8 @@
     <None Remove="Newtonsoft.Json" />
     <None Remove="Pages\Reports\" />
     <None Remove="Migrations\" />
+    <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
+    <None Remove="Swashbuckle.AspNetCore" />
+    <None Remove="Microsoft.EntityFrameworkCore.DynamicLinq" />
   </ItemGroup>
 </Project>
