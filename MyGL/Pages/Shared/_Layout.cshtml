@@ -90,6 +90,14 @@
                 }
             }
         }
+        var btns = document.getElementsByClassName("btn");
+        for (var i = 0, len = btns.length; i < len; i++) {
+            if (!(btns[i].onclick)) {
+                btns[i].onclick = function () {
+                    $("#processing").removeClass("visually-hidden");
+                }
+            }
+        }
 
         window.addEventListener("pageshow", function (event) {
             var historyTraversal = event.persisted ||
