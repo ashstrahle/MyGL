@@ -18,7 +18,7 @@ namespace MyGL.Pages.Accounts
 
         public async Task OnGetAsync()
         {
-            Account = await _context.Accounts.ToListAsync();
+            Account = await _context.Accounts.OrderBy(a => a.AccountName).ToListAsync();
         }
     }
 }

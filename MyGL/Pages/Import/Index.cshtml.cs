@@ -1,4 +1,4 @@
-#nullable disable
+﻿#nullable disable
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -22,7 +22,7 @@ namespace MyGL.Pages.Import
 
         public IActionResult OnGet()
         {
-            ViewData["AccountList"] = new SelectList(_context.Accounts, "Id", "AccountName");
+            ViewData["AccountList"] = new SelectList(_context.Accounts.OrderBy(a => a.AccountName), "Id", "AccountName");
             return Page();
         }
 
@@ -33,7 +33,7 @@ namespace MyGL.Pages.Import
 
             ViewData["Info"] = "Database update complete";
 
-            ViewData["AccountList"] = new SelectList(_context.Accounts, "Id", "AccountName");
+            ViewData["AccountList"] = new SelectList(_context.Accounts.OrderBy(a => a.AccountName), "Id", "AccountName");
             return Page();
         }
 
@@ -45,7 +45,7 @@ namespace MyGL.Pages.Import
         {
             int totalLineCount = 0;
             Account = await _context.Accounts.FirstOrDefaultAsync(m => m.Id == Account.Id);
-            ViewData["AccountList"] = new SelectList(_context.Accounts, "Id", "AccountName");
+            ViewData["AccountList"] = new SelectList(_context.Accounts.OrderBy(a => a.AccountName), "Id", "AccountName");
 
             if (Account == null)
             {
