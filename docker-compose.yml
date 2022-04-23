@@ -1,4 +1,4 @@
-version: '3.4'
+﻿version: '3.4'
 
 services:
   db:
@@ -24,6 +24,8 @@ services:
     ports: 
        - "9999:80"
     restart: always
+    # environment:
+    #     - ASPNETCORE_ENVIRONMENT=Development
     depends_on: 
        - db
 volumes:

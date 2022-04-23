@@ -21,13 +21,14 @@
             <br />
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Account.HeaderRow" /> @Html.DisplayNameFor(model => model.Account.HeaderRow)
+                    <input class="form-check-input" asp-for="Account.HeaderRow" />
+                    <label asp-for="Account.HeaderRow" class="control-label"></label>
                 </label>
             </div>
             <br />
             <div class="form-group">
                 <label asp-for="Account.DateFormat" class="control-label"></label>
-                @Html.DropDownListFor(m => m.Account.DateFormat, new SelectList(Model.DateFormatList))
+                <select asp-for="Account.DateFormat" class="form-control" asp-items="new SelectList(Model.DateFormatList)"></select>
                 <span asp-validation-for="Account.DateFormat" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -35,7 +36,6 @@
                 <input asp-for="Account.DateColNo" class="form-control" />
                 <span asp-validation-for="Account.DateColNo" class="text-danger"></span>
             </div>
-            <br />
             <div class="form-group">
                 <label asp-for="Account.DescriptionColNo" class="control-label"></label>
                 <input asp-for="Account.DescriptionColNo" class="form-control" />
