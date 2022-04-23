@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Net.Http.Headers;
 
-namespace MyGL.Pages.FY
+namespace MyGL.Pages.GLFY
 {
     public class IndexModel : PageModel
     {
