@@ -26,7 +26,7 @@ namespace MyGL.Pages.Yr
 
         public List<string>YrList { get; set; }
 
-        [Display(Name = "Years")]
+        [Display(Name = "Year")]
         public SelectList Yrs { get; set; }
 
         [DataType(DataType.Date)]

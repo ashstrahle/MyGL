@@ -26,7 +26,7 @@ namespace MyGL.Pages.FY
 
         public List<string>FYList { get; set; }
 
-        [Display(Name = "Financial Years")]
+        [Display(Name = "Financial Year")]
         public SelectList FYs { get; set; }
 
         [DataType(DataType.Date)]
