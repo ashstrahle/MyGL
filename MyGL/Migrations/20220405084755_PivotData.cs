@@ -17,6 +17,8 @@ namespace MyGL.Migrations
                 , t.Amount
                 , c.CategoryName
                 , c.SubCategory
+                , d.Year
+                , d.QuarterFormat
                 , d.FinancialYear
                 , d.FinancialQuarterFormat
                 , d.MonthNameShortFormat

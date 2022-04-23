@@ -1,4 +1,4 @@
-#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+﻿#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
@@ -11,6 +11,7 @@ COPY ["MyGL/MyGL.csproj", "MyGL/"]
 RUN dotnet restore "MyGL/MyGL.csproj"
 COPY . .
 WORKDIR "/src/MyGL"
+RUN docker clean
 RUN dotnet build "MyGL.csproj" -c Release -o /app/build
 
 FROM build AS publish

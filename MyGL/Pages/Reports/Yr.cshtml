@@ -1,14 +1,14 @@
-@page
-@model MyGL.Pages.FY.IndexModel
+﻿@page
+@model MyGL.Pages.Yr.IndexModel
 @{
-    ViewData["Title"] = "Financial Year Report";
+    ViewData["Title"] = "Calendar Year Report";
 }
 
 <h1>@ViewData["Title"]</h1>
 <form method="post">
     <div class="form-group">
-        <label asp-for="FYs" class="control-label"></label>
-        <select asp-for="SelectedFY" class="form-control" asp-items="@Model.FYs">
+        <label asp-for="Yrs" class="control-label"></label>
+        <select asp-for="SelectedYr" class="form-control" asp-items="@Model.Yrs">
         </select>
     </div>
     <br />
@@ -18,11 +18,11 @@
 </form>
 <br />
 <div>
-    <b>@Model.SelectedFY</b> @if (Model.SelectedFY == Model.FYList.First().ToString()) { <span>as at @Model.LatestTrans</span> }
+    <b>@Model.SelectedYr</b> @if (Model.SelectedYr == Model.YrList.First().ToString()) { <span>as at @Model.LatestTrans</span> }
     <ejs-pivotview id="PivotView" height="1000" width="1500" ShowFieldList="true" enableVirtualization="true">
         <e-datasourcesettings dataSource="@ViewBag.DataSource" expandAll="false" enableSorting="true">
             <e-drilledmembers>
-                <e-field name="FinancialQuarterFormat" items="@ViewBag.DrilledMembers"></e-field>
+                <e-field name="QuarterFormat" items="@ViewBag.DrilledMembers"></e-field>
             </e-drilledmembers>
             <e-formatsettings>
                 <e-field name="Amount" format="C0" maximumSignificantDigits="10" minimumSignificantDigits="1" useGrouping="true"></e-field>
@@ -32,7 +32,7 @@
                 <e-field name="SubCategory" caption="Sub Category"></e-field>
             </e-rows>
             <e-columns>
-                <e-field name="FinancialQuarterFormat" caption="FQ" showSubTotals="false"></e-field>
+                <e-field name="QuarterFormat" caption="FQ" showSubTotals="false"></e-field>
                 <e-field name="MonthNameShortFormat" caption="Month"></e-field>
             </e-columns>
             <e-values>

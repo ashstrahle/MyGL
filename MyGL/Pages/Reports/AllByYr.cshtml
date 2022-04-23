@@ -1,7 +1,7 @@
 ﻿@page
-@model MyGL.Pages.All.IndexModel
+@model MyGL.Pages.AllByYr.IndexModel
 @{
-    ViewData["Title"] = "All Transactions By Financial Year";
+    ViewData["Title"] = "All Transactions By Calendar Year";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -17,8 +17,8 @@
             <e-field name="SubCategory" caption="Sub Category"></e-field>
         </e-rows>
         <e-columns>
-            <e-field name="FinancialYear" caption="FY"></e-field>
-            <e-field name="FinancialQuarterFormat" caption="FQ"></e-field>
+            <e-field name="Year" caption="FY"></e-field>
+            <e-field name="QuarterFormat" caption="FQ"></e-field>
             <e-field name="MonthNameShortFormat" caption="Month"></e-field>
         </e-columns>
         <e-values>
