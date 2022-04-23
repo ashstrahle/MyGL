@@ -6,12 +6,15 @@
 }
 
 <h1>Transactions</h1>
-
+<form method="post">
+    <input type="text" name="SearchString">
+    <input type="submit" value="Search" class="btn btn-primary" />
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                <a asp-page="./Transactions" asp-route-OrderField="Date" asp-route-LastOrder=@Model.LastOrder>@Html.DisplayNameFor(model => model.Transactions[0].Date)</a> 
+                <a asp-page="./Transactions" asp-route-OrderField="Date" asp-route-LastOrder=@Model.LastOrder>@Html.DisplayNameFor(model => model.Transactions[0].Date)</a>
             </th>
             <th>
                 <a asp-page="./Transactions" asp-route-OrderField="Description" asp-route-LastOrder=@Model.LastOrder>@Html.DisplayNameFor(model => model.Transactions[0].Description)</a>
@@ -20,39 +23,40 @@
                 @Html.DisplayNameFor(model => model.Transactions[0].Category)
             </th>
             <th>
-                <a asp-page="./Transactions" asp-route-OrderField="Amount" asp-route-LastOrder=@Model.LastOrder>@Html.DisplayNameFor(model=> model.Transactions[0].Amount)</a>
+                <a asp-page="./Transactions" asp-route-OrderField="Amount" asp-route-LastOrder=@Model.LastOrder>@Html.DisplayNameFor(model => model.Transactions[0].Amount)</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Transactions[0].GST)
             </th>
             <th>
-                <a  asp-page="./Transactions" asp-route-OrderField="Account" asp-route-LastOrder=@Model.LastOrder>@Html.DisplayNameFor(model=> model.Transactions[0].Account)</a>
+               @Html.DisplayNameFor(model => model.Transactions[0].Account)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Transactions) {
-        <tr>
-            <td>
-                @item.Date.ToString("dd/MM/yyyy")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.CategorySubCategory)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GST)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Account.AccountName)
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Transactions)
+        {
+            <tr>
+                <td>
+                    @item.Date.ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.CategorySubCategory)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GST)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Account.AccountName)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

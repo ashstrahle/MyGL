@@ -24,28 +24,46 @@ namespace MyGL.Pages
 
         public string LastOrder;
 
-        public async Task OnGetAsync(string OrderField, string lastOrder)
+        public void OnGet(string orderField, string lastOrder)
         {
-            var trans = await _context.Transactions
-                .Include(t => t.Account)
-                .Include(t => t.Category)
-                .ToListAsync();
-
-            if (OrderField is null)
-                Transactions = trans.OrderByDescending(t => t.Date).ToList();
+            if (orderField is null)
+                Transactions = GetTransactionsAsync("").Result.OrderByDescending(t => t.Date).ToList();
             else
             {
-                PropertyInfo prop = typeof(Transaction).GetProperty(OrderField);
-                if (lastOrder == OrderField) // Toggle the order if we sorted on this field previously
+                PropertyInfo prop = typeof(Transaction).GetProperty(orderField);
+                if (lastOrder == orderField) // Toggle the order if we sorted on this field previously
                 {
-                    Transactions = (List<Transaction>)trans.OrderByDescending(x => prop.GetValue(x, null)).ToList();
+                    Transactions = (List<Transaction>)GetTransactionsAsync("").Result.OrderByDescending(x => prop.GetValue(x, null)).ToList();
                     LastOrder = null;
                 }
                 else
                 {
-                    Transactions = (List<Transaction>)trans.OrderBy(x => prop.GetValue(x, null)).ToList();
-                    LastOrder = OrderField;
+                    Transactions = (List<Transaction>)GetTransactionsAsync("").Result.OrderBy(x => prop.GetValue(x, null)).ToList();
+                    LastOrder = orderField;
                 }
+            }
+        }
+
+        public void OnPost(string searchString)
+        {
+            Transactions = GetTransactionsAsync(searchString).Result.OrderByDescending(t => t.Date).ToList();
+        }
+
+        private async Task<List<Transaction>> GetTransactionsAsync(string searchString)
+        {
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                return await _context.Transactions.Where(t => t.Description.Contains(searchString))
+                    .Include(t => t.Account)
+                    .Include(t => t.Category)
+                    .ToListAsync();
+            }
+            else
+            {
+                return await _context.Transactions
+                .Include(t => t.Account)
+                .Include(t => t.Category)
+                .ToListAsync();
             }
         }
     }
