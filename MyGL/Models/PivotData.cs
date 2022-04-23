@@ -18,6 +18,10 @@ namespace MyGL.Models
         public string ?CategoryName { get; set; }
         [Display(Name = "SubCategory")]
         public string ?SubCategory { get; set; }
+        [Display(Name = "Yr")]
+        public int Year { get; set; }
+        [Display(Name = "Q")]
+        public string QuarterFormat { get; set; }
         [Display(Name = "FY")]
         public string FinancialYear { get; set; }
         [Display(Name = "FQ")]

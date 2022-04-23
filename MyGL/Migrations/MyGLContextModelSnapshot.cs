@@ -248,6 +248,14 @@ namespace MyGL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("QuarterFormat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Year")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FinancialQuarterFormat")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

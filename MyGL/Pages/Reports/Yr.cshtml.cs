@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Net.Http.Headers;
 
-namespace MyGL.Pages.FY
+namespace MyGL.Pages.Yr
 {
     public class IndexModel : PageModel
     {
@@ -22,12 +22,12 @@ namespace MyGL.Pages.FY
         }
 
         [BindProperty]
-        public string SelectedFY { get; set; }
+        public string SelectedYr { get; set; }
 
-        public List<string>FYList { get; set; }
+        public List<string>YrList { get; set; }
 
-        [Display(Name = "Financial Years")]
-        public SelectList FYs { get; set; }
+        [Display(Name = "Years")]
+        public SelectList Yrs { get; set; }
 
         [DataType(DataType.Date)]
         public string LatestTrans{ get; set; }
@@ -35,16 +35,16 @@ namespace MyGL.Pages.FY
         public async Task<IActionResult>OnGetAsync()
         {
             List<PivotData> data = _context.view_PivotData.ToList();
-            FYList = data.OrderByDescending(pd => pd.FinancialYear).Select(pd => pd.FinancialYear).Distinct().ToList();
-            if (FYList.Count() == 0)
+            YrList = data.OrderByDescending(pd => pd.Year.ToString()).Select(pd => pd.Year.ToString()).Distinct().ToList();
+            if (YrList.Count() == 0)
             {
                 ModelState.AddModelError("Error", "No data");
                 return RedirectToPage("./Index");
             }
-            FYs = new SelectList(FYList);
-            SelectedFY = FYList.FirstOrDefault();
-            ViewData["DataSource"] = data.Where(pd => pd.FinancialYear == FYList.FirstOrDefault());
-            ViewData["DrilledMembers"] = data.Select(pd => pd.FinancialQuarterFormat).Distinct().ToArray();
+            Yrs = new SelectList(YrList);
+            SelectedYr = YrList.FirstOrDefault();
+            ViewData["DataSource"] = data.Where(pd => pd.Year.ToString() == YrList.FirstOrDefault());
+            ViewData["DrilledMembers"] = data.Select(pd => pd.QuarterFormat).Distinct().ToArray();
             LatestTrans = _context.Transactions.OrderByDescending(t => t.Date).FirstOrDefault().Date.ToString("d/MM/yyyy"); 
             return Page();
         }
@@ -56,12 +56,12 @@ namespace MyGL.Pages.FY
                 return Page();
             }
 
-            string Selected = SelectedFY;
+            string Selected = SelectedYr;
             List<PivotData> data = _context.view_PivotData.ToList();
-            FYList = data.OrderByDescending(pd => pd.FinancialYear).Select(pd => pd.FinancialYear).Distinct().ToList();
-            FYs = new SelectList(FYList);
-            ViewData["DataSource"] = data.Where(pd => pd.FinancialYear == SelectedFY);
-            ViewData["DrilledMembers"] = data.Select(pd => pd.FinancialQuarterFormat).Distinct().ToArray();
+            YrList = data.OrderByDescending(pd => pd.Year.ToString()).Select(pd => pd.Year.ToString()).Distinct().ToList();
+            Yrs = new SelectList(YrList);
+            ViewData["DataSource"] = data.Where(pd => pd.Year.ToString() == SelectedYr);
+            ViewData["DrilledMembers"] = data.Select(pd => pd.QuarterFormat).Distinct().ToArray();
             LatestTrans = _context.Transactions.OrderByDescending(t => t.Date).FirstOrDefault().Date.ToString("d/MM/yyyy");
             return Page();
         }
