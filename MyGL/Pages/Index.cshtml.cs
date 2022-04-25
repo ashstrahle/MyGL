@@ -31,7 +31,7 @@ namespace MyGL.Pages
 
         public void OnGet()
         {
-            foreach (Account account in _context.Accounts)
+            foreach (Account account in _context.Accounts.OrderBy(a => a.AccountName))
             {
                 if (_context.Transactions.Where(t => t.Account == account).Count() > 0)
                 {
