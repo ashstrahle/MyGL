@@ -19,7 +19,7 @@
 <br />
 <div>
     <b>@Model.SelectedFY</b> @if (Model.SelectedFY == Model.FYList.First().ToString()) { <span>as at @Model.LatestTrans</span> }
-    <ejs-pivotview id="PivotView" height="1000" width="1500" ShowFieldList="true" enableVirtualization="true">
+    <ejs-pivotview id="PivotView" height="10000" ShowFieldList="true" allowDrillThrough="true" enableVirtualization="true">
         <e-datasourcesettings dataSource="@ViewBag.DataSource" expandAll="false" enableSorting="true">
             <e-drilledmembers>
                 <e-field name="FinancialQuarterFormat" items="@ViewBag.DrilledMembers"></e-field>
