@@ -3676,7 +3676,7 @@ function adoptValue( value, resolve, reject, noValue ) {
 
 	// For Promises/A+, convert exceptions into rejections
 	// Since jQuery.when doesn't unwrap thenables, we can skip the extra checks appearing in
-	// Deferred#then to conditionally suppress rejection.
+	// Deferred#then to Ruleally suppress rejection.
 	} catch ( value ) {
 
 		// Support: Android 4.0 only
@@ -6621,12 +6621,12 @@ function curCSS( elem, name, computed ) {
 }
 
 
-function addGetHookIf( conditionFn, hookFn ) {
+function addGetHookIf( RuleFn, hookFn ) {
 
 	// Define the hook, we'll check on the first run if it's really needed.
 	return {
 		get: function() {
-			if ( conditionFn() ) {
+			if ( RuleFn() ) {
 
 				// Hook not needed (or it's not possible to use it due
 				// to missing dependency), remove it.
@@ -10005,7 +10005,7 @@ jQuery.ajaxTransport( function( options ) {
 				}
 
 				// X-Requested-With header
-				// For cross-domain requests, seeing as conditions for a preflight are
+				// For cross-domain requests, seeing as Rules for a preflight are
 				// akin to a jigsaw puzzle, we simply never set it to be sure.
 				// (it can always be set on a per-request basis or even using ajaxSetup)
 				// For same-domain requests, won't change header if already provided.

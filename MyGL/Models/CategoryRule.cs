@@ -2,7 +2,7 @@
 
 namespace MyGL.Models
 {
-    public class CategoryCondition
+    public class CategoryRule
     {
         [Key]
         public int Id { get; set; }

@@ -951,7 +951,7 @@ $.validator.addMethod( "postcodeUK", function( value, element ) {
  * description: {require_from_group: [1,".productinfo"]}
  *
  * options[0]: number of fields that must be filled in the group
- * options[1]: CSS selector that defines the group of conditionally required fields
+ * options[1]: CSS selector that defines the group of Ruleally required fields
  */
 $.validator.addMethod( "require_from_group", function( value, element, options ) {
 	var $fields = $( options[ 1 ], element.form ),
@@ -993,7 +993,7 @@ $.validator.addMethod( "require_from_group", function( value, element, options )
  * color:		{skip_or_fill_minimum: [2,".productinfo"]}
  *
  * options[0]: number of fields that must be filled in the group
- * options[1]: CSS selector that defines the group of conditionally required fields
+ * options[1]: CSS selector that defines the group of Ruleally required fields
  *
  */
 $.validator.addMethod( "skip_or_fill_minimum", function( value, element, options ) {

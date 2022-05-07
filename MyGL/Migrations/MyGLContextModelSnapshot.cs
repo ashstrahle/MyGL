@@ -85,7 +85,7 @@ namespace MyGL.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("MyGL.Models.CategoryCondition", b =>
+            modelBuilder.Entity("MyGL.Models.CategoryRule", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -104,7 +104,7 @@ namespace MyGL.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("CategoryConditions");
+                    b.ToTable("CategoryRules");
                 });
 
             modelBuilder.Entity("MyGL.Models.DimDate", b =>
@@ -322,7 +322,7 @@ namespace MyGL.Migrations
                     b.ToTable("Transactions");
                 });
 
-            modelBuilder.Entity("MyGL.Models.CategoryCondition", b =>
+            modelBuilder.Entity("MyGL.Models.CategoryRule", b =>
                 {
                     b.HasOne("MyGL.Models.Category", "Category")
                         .WithMany()

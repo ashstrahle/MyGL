@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MyGL.Controllers;
 using MyGL.Models;
 
-namespace MyGL.Pages.CategoryConditions
+namespace MyGL.Pages.CategoryRules
 {
     public class CreateModel : PageModel
     {
@@ -18,7 +18,7 @@ namespace MyGL.Pages.CategoryConditions
         }
 
         [BindProperty]
-        public CategoryCondition CategoryCondition { get; set; }
+        public CategoryRule CategoryRule { get; set; }
 
         [BindProperty]
         [Display(Name = "Update Database")]
@@ -35,10 +35,10 @@ namespace MyGL.Pages.CategoryConditions
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync(string referer = null)
         {
-            if (_context.CategoryConditions.Where(c => c.SearchString == CategoryCondition.SearchString).Count() > 0)
+            if (_context.CategoryRules.Where(c => c.SearchString == CategoryRule.SearchString).Count() > 0)
             {
-                ModelState.AddModelError("Error", "'" + CategoryCondition.SearchString + "' already exists");
-                ViewData["SearchString"] = CategoryCondition.SearchString;
+                ModelState.AddModelError("Error", "'" + CategoryRule.SearchString + "' already exists");
+                ViewData["SearchString"] = CategoryRule.SearchString;
                 ViewData["referer"] = referer;
             }
 
@@ -47,7 +47,7 @@ namespace MyGL.Pages.CategoryConditions
                 return Page();
             }
 
-            _context.CategoryConditions.Add(CategoryCondition);
+            _context.CategoryRules.Add(CategoryRule);
             _context.SaveChanges();
 
             if (Update)

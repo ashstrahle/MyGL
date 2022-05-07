@@ -15,7 +15,7 @@ namespace MyGL.Data
 
         public DbSet<Models.Account> Accounts { get; set; }
         public DbSet<Models.Category> Categories { get; set; }
-        public DbSet<Models.CategoryCondition> CategoryConditions { get; set; }
+        public DbSet<Models.CategoryRule> CategoryRules { get; set; }
         public DbSet<Models.LoadTable> LoadTable { get; set; }
         public DbSet<Models.Transaction> Transactions { get; set; }
         public DbSet<Models.DimDate> DimDates { get; set; }
