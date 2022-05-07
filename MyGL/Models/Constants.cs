@@ -33,7 +33,7 @@ namespace MyGL.Models
 			("Rent", "Rent")
 		});
 
-		public static readonly ReadOnlyCollection<(string, string)> DefaultCategoryConditions = new(new[]
+		public static readonly ReadOnlyCollection<(string, string)> DefaultCategoryRules = new(new[]
 		{
 			("TPG INTERNET", "Internet"),
 			("AMAYSIM", "Phone"),

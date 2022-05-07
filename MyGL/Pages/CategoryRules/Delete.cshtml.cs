@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MyGL.Models;
 
-namespace MyGL.Pages.CategoryConditions
+namespace MyGL.Pages.CategoryRules
 {
     public class DeleteModel : PageModel
     {
@@ -16,7 +16,7 @@ namespace MyGL.Pages.CategoryConditions
         }
 
         [BindProperty]
-        public CategoryCondition CategoryCondition { get; set; }
+        public CategoryRule CategoryRule { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -25,10 +25,10 @@ namespace MyGL.Pages.CategoryConditions
                 return NotFound();
             }
 
-            CategoryCondition = await _context.CategoryConditions
+            CategoryRule = await _context.CategoryRules
                 .Include(c => c.Category).FirstOrDefaultAsync(m => m.Id == id);
 
-            if (CategoryCondition == null)
+            if (CategoryRule == null)
             {
                 return NotFound();
             }
@@ -42,11 +42,11 @@ namespace MyGL.Pages.CategoryConditions
                 return NotFound();
             }
 
-            CategoryCondition = await _context.CategoryConditions.FindAsync(id);
+            CategoryRule = await _context.CategoryRules.FindAsync(id);
 
-            if (CategoryCondition != null)
+            if (CategoryRule != null)
             {
-                _context.CategoryConditions.Remove(CategoryCondition);
+                _context.CategoryRules.Remove(CategoryRule);
                 await _context.SaveChangesAsync();
             }
 

@@ -1,5 +1,5 @@
 ﻿@page
-@model MyGL.Pages.CategoryConditions.CreateModel
+@model MyGL.Pages.CategoryRules.CreateModel
 
 @{
     ViewData["Title"] = "Create";
@@ -7,7 +7,7 @@
 
 <h1>Create</h1>
 
-<h4>Category Condition</h4>
+<h4>Category Rule</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,14 +15,14 @@
             <input type="hidden" name="referer" Value="@ViewBag.referer" /> <!-- Pass along the desired return page -->
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="CategoryCondition.SearchString" class="control-label"></label>
-                <input asp-for="CategoryCondition.SearchString" class="form-control" Value="@ViewBag.SearchString" />
-                <span asp-validation-for="CategoryCondition.SearchString" class="text-danger"></span>
+                <label asp-for="CategoryRule.SearchString" class="control-label"></label>
+                <input asp-for="CategoryRule.SearchString" class="form-control" Value="@ViewBag.SearchString" />
+                <span asp-validation-for="CategoryRule.SearchString" class="text-danger"></span>
             </div>
             <br>
             <div class="form-group">
-                <label asp-for="CategoryCondition.CategoryId" class="control-label"></label>
-                <select asp-for="CategoryCondition.CategoryId" class="form-control" asp-items="ViewBag.CategoryId">
+                <label asp-for="CategoryRule.CategoryId" class="control-label"></label>
+                <select asp-for="CategoryRule.CategoryId" class="form-control" asp-items="ViewBag.CategoryId">
                     <option disabled selected>--- SELECT ---</option>
                 </select>
             </div>

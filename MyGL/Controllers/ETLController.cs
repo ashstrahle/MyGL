@@ -95,7 +95,7 @@ namespace MyGL.Controllers
         {
             foreach (Transaction transaction in transactions)
             {
-                foreach (var category in _context.CategoryConditions)
+                foreach (var category in _context.CategoryRules)
                 {
                     if (transaction.Description.ToUpper().Contains(category.SearchString.ToUpper()))
                     {

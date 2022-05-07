@@ -1,5 +1,5 @@
 ﻿@page
-@model MyGL.Pages.CategoryConditions.DeleteModel
+@model MyGL.Pages.CategoryRules.DeleteModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -9,25 +9,25 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Category Condition</h4>
+    <h4>Category Rule</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CategoryCondition.SearchString)
+            @Html.DisplayNameFor(model => model.CategoryRule.SearchString)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CategoryCondition.SearchString)
+            @Html.DisplayFor(model => model.CategoryRule.SearchString)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CategoryCondition.Category)
+            @Html.DisplayNameFor(model => model.CategoryRule.Category)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CategoryCondition.Category.CategoryName)
+            @Html.DisplayFor(model => model.CategoryRule.Category.CategoryName)
         </dd>
     </dl>
     
     <form method="post">
-        <input type="hidden" asp-for="CategoryCondition.Id" />
+        <input type="hidden" asp-for="CategoryRule.Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-page="./Index">Back to List</a>
     </form>

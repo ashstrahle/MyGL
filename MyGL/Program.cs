@@ -68,16 +68,16 @@ using (var scope = app.Services.CreateScope())
         }
         db.SaveChanges();
 
-        // Add Default Conditions to database
-        foreach (var defaultcondition in Constants.DefaultCategoryConditions)
+        // Add Default Rules to database
+        foreach (var defaultRule in Constants.DefaultCategoryRules)
         {
-            int id = db.Categories.Where(c => c.SubCategory == defaultcondition.Item2).FirstOrDefault().Id;
-            CategoryCondition condition = new()
+            int id = db.Categories.Where(c => c.SubCategory == defaultRule.Item2).FirstOrDefault().Id;
+            CategoryRule Rule = new()
             {
-                SearchString = defaultcondition.Item1,
+                SearchString = defaultRule.Item1,
                 CategoryId = id
             };
-            db.CategoryConditions.Add(condition);
+            db.CategoryRules.Add(Rule);
         }
         db.SaveChanges();
     }

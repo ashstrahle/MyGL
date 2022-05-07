@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MyGL.Models;
 
-namespace MyGL.Pages.CategoryConditions
+namespace MyGL.Pages.CategoryRules
 {
     public class IndexModel : PageModel
     {
@@ -14,11 +14,11 @@ namespace MyGL.Pages.CategoryConditions
             _context = context;
         }
 
-        public IList<CategoryCondition> CategoryCondition { get; set; }
+        public IList<CategoryRule> CategoryRule { get; set; }
 
         public async Task OnGetAsync()
         {
-            CategoryCondition = await _context.CategoryConditions.OrderBy(c => c.SearchString)
+            CategoryRule = await _context.CategoryRules.OrderBy(c => c.SearchString)
                 .Include(c => c.Category).ToListAsync();
         }
     }

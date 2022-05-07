@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using MyGL.Controllers;
 using MyGL.Models;
 
-namespace MyGL.Pages.CategoryConditions
+namespace MyGL.Pages.CategoryRules
 {
     public class EditModel : PageModel
     {
@@ -18,7 +18,7 @@ namespace MyGL.Pages.CategoryConditions
         }
 
         [BindProperty]
-        public CategoryCondition CategoryCondition { get; set; }
+        public CategoryRule CategoryRule { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -27,10 +27,10 @@ namespace MyGL.Pages.CategoryConditions
                 return NotFound();
             }
 
-            CategoryCondition = await _context.CategoryConditions
+            CategoryRule = await _context.CategoryRules
                 .Include(c => c.Category).FirstOrDefaultAsync(m => m.Id == id);
 
-            if (CategoryCondition == null)
+            if (CategoryRule == null)
             {
                 return NotFound();
             }
@@ -47,7 +47,7 @@ namespace MyGL.Pages.CategoryConditions
                 return Page();
             }
 
-            _context.Attach(CategoryCondition).State = EntityState.Modified;
+            _context.Attach(CategoryRule).State = EntityState.Modified;
 
             try
             {
@@ -55,7 +55,7 @@ namespace MyGL.Pages.CategoryConditions
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CategoryConditionExists(CategoryCondition.Id))
+                if (!CategoryRuleExists(CategoryRule.Id))
                 {
                     return NotFound();
                 }
@@ -64,10 +64,10 @@ namespace MyGL.Pages.CategoryConditions
                     throw;
                 }
             }
-            // Update Category for all Transactions that match this updated CategoryCondition
-            foreach(Transaction transaction in _context.Transactions.Where(t => t.Description.ToUpper().Contains(CategoryCondition.SearchString.ToUpper())))
+            // Update Category for all Transactions that match this updated CategoryRule
+            foreach(Transaction transaction in _context.Transactions.Where(t => t.Description.ToUpper().Contains(CategoryRule.SearchString.ToUpper())))
             {
-                transaction.CategoryId = CategoryCondition.CategoryId;
+                transaction.CategoryId = CategoryRule.CategoryId;
                 _context.Attach(transaction).State = EntityState.Modified;          
             }
             _context.SaveChanges();
@@ -78,9 +78,9 @@ namespace MyGL.Pages.CategoryConditions
             return RedirectToPage("./Index");
         }
 
-        private bool CategoryConditionExists(int id)
+        private bool CategoryRuleExists(int id)
         {
-            return _context.CategoryConditions.Any(e => e.Id == id);
+            return _context.CategoryRules.Any(e => e.Id == id);
         }
     }
 }

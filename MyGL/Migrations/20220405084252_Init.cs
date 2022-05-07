@@ -102,7 +102,7 @@ namespace MyGL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CategoryConditions",
+                name: "CategoryRules",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -112,9 +112,9 @@ namespace MyGL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CategoryConditions", x => x.Id);
+                    table.PrimaryKey("PK_CategoryRules", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CategoryConditions_Categories_CategoryId",
+                        name: "FK_CategoryRules_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
@@ -155,8 +155,8 @@ namespace MyGL.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CategoryConditions_CategoryId",
-                table: "CategoryConditions",
+                name: "IX_CategoryRules_CategoryId",
+                table: "CategoryRules",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
@@ -178,7 +178,7 @@ namespace MyGL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CategoryConditions");
+                name: "CategoryRules");
 
             migrationBuilder.DropTable(
                 name: "DimDates");

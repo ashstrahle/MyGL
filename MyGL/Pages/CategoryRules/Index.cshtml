@@ -1,8 +1,8 @@
 ﻿@page
-@model MyGL.Pages.CategoryConditions.IndexModel
+@model MyGL.Pages.CategoryRules.IndexModel
 
 @{
-    ViewData["Title"] = "Category Conditions";
+    ViewData["Title"] = "Category Rules";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -14,16 +14,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CategoryCondition[0].SearchString)
+                @Html.DisplayNameFor(model => model.CategoryRule[0].SearchString)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CategoryCondition[0].Category)
+                @Html.DisplayNameFor(model => model.CategoryRule[0].Category)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.CategoryCondition) {
+@foreach (var item in Model.CategoryRule) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.SearchString)
