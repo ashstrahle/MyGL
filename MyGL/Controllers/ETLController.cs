@@ -1,5 +1,4 @@
 ﻿#nullable disable
-using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyGL.Data;

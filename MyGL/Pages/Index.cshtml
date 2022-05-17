@@ -7,27 +7,37 @@
 <div class="text-center">
     <h1 class="display-4">MyGL</h1>
 </div>
+@if (Model.AccountCount is 0)
+{
+    <a asp-page="/Accounts/Create">Create Account</a>
+}
+else
+if (Model.Stats.Count is 0)
+{
+    <a asp-page="/Import/Index">Import Transactions</a>
+}
+else
+{
+    <h4>Stats</h4>
 
-<h4>Stats</h4>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Account
-            </th>
-            <th>
-                Date
-            </th>
-            <th>
-                Total Transactions
-            </th>
-            <th>
-                Total Uncategorised
-            </th>
-        </tr>
-    </thead>
-    <tbody>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Account
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Total Transactions
+                </th>
+                <th>
+                    Total Uncategorised
+                </th>
+            </tr>
+        </thead>
+        <tbody>
         @foreach (var item in Model.Stats)
         {
             @if (item.Account.AccountName == "Total")
@@ -66,7 +76,7 @@
                         </td>
                     </tr>
                 }
-         }
-    </tbody>
-</table>
- 
+            }
+        </tbody>
+    </table>
+}
