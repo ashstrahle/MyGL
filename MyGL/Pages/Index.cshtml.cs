@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Globalization;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using MyGL.Data;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyGL.Models;
 
 namespace MyGL.Pages
@@ -29,8 +26,11 @@ namespace MyGL.Pages
 
         public List<Stat> Stats = new();
 
+        public int AccountCount = new();
+
         public void OnGet()
         {
+            AccountCount = _context.Accounts.Count();
             foreach (Account account in _context.Accounts.OrderBy(a => a.AccountName))
             {
                 if (_context.Transactions.Where(t => t.Account == account).Count() > 0)
