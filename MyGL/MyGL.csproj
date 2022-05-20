@@ -37,6 +37,7 @@
     <Folder Include="Controllers\" />
     <Folder Include="Pages\Reports\" />
     <Folder Include="Migrations\" />
+    <Folder Include="docs\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Controllers\" />
@@ -48,5 +49,6 @@
     <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
     <None Remove="Swashbuckle.AspNetCore" />
     <None Remove="Microsoft.EntityFrameworkCore.DynamicLinq" />
+    <None Remove="docs\" />
   </ItemGroup>
 </Project>
