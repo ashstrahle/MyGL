@@ -1,7 +1,7 @@
 ﻿# MyGL
 
 Convert this
-![](docs/csv.png)
+![](/docs/csv.jpg)
 
 into this
-![]("/docs/GL - Financial Year Report.png")
+![](/docs/GL-FinancialYearReport.jpg)
