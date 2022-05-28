@@ -22,8 +22,8 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.5" />
-    <PackageReference Include="Syncfusion.EJ2.AspNet.Core" Version="20.1.0.56" />
-    <PackageReference Include="Syncfusion.Licensing" Version="20.1.0.56" />
+    <PackageReference Include="Syncfusion.EJ2.AspNet.Core" Version="20.1.0.57" />
+    <PackageReference Include="Syncfusion.Licensing" Version="20.1.0.57" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
