@@ -8,7 +8,6 @@ env:
   IMAGE_NAME: mygl
   IMAGE_TAG: latest
   IMAGE_REGISTRY: ghcr.io
-  # IMAGE_NAMESPACE: astrahle
 
 jobs:
   build:
@@ -28,7 +27,7 @@ jobs:
         with:
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ env.IMAGE_TAG }}
-          archs: arm64
+          archs: arm64/v8
           dockerfiles: |
             ./MyGL/Dockerfile
       
