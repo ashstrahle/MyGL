@@ -23,8 +23,31 @@ jobs:
         with:
           arch: ${{ matrix.arch }}
           distro: ${{ matrix.distro }}
-          working-directory: ${{ env.GITHUB_WORKSPACE }}
+
+          # Not required, but speeds up builds
+          githubToken: ${{ github.token }}
+
+          # Create an artifacts directory
+          setup: |
+            mkdir -p "${PWD}/artifacts"
+
+          # Mount the artifacts directory as /artifacts in the container
+          dockerRunArgs: |
+            --volume "${PWD}/artifacts:/artifacts"
+
+          # Pass some environment variables to the container
+          env: | # YAML, but pipe character is necessary
+            artifact_name: git-${{ matrix.distro }}_${{ matrix.arch }}
+
           run: |
-            sudo docker-compose build
+            cp $(which git) "/artifacts/${artifact_name}"
+            echo "Produced artifact at /artifacts/${artifact_name}"
+            # sudo docker-compose build
             # docker build . --file Dockerfile --tag MyGL$-{{ matrix.arch }}:latest
-            docker push ghcr.io/OWNER/MyGL-{{ matrix.arch }}:latest
+            # docker push ghcr.io/OWNER/MyGL-{{ matrix.arch }}:latest
+            
+      - name: Show the artifact
+        # Items placed in /artifacts in the container will be in
+        # ${PWD}/artifacts on the host.
+        run: |
+          ls -al "${PWD}/artifacts"
