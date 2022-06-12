@@ -13,14 +13,11 @@
   - Re-import data without duplication
 
 ## Setup
-The simplest way to setup MyGL is using **docker-compose**.
 
-Create a separate directory for MyGL and place a copy of ```docker-compose.yml``` from this repo.
-
-Next, copy ```.env.example``` (again from this repo) to ```.env``` and adjust settings as required. Be sure to at least change ```SA_PASSWD``` to a secure password of your choosing.
+Copy `.env.example` to `.env` and adjust settings as required. Be sure to at least change `SA_PASSWD` to a secure password of your choosing.
 
 Run:
   
-```docker-compose up```  
-  
-To access, go to http://localhost:9999 (or to the port you set in ```.env```)
+`docker-compose up`  
+
+Open http://localhost:9999 (or the port you set in `.env`)
