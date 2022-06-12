@@ -8,7 +8,7 @@ env:
   IMAGE_NAME: mygl
   IMAGE_TAG: latest
   IMAGE_REGISTRY: ghcr.io
-  IMAGE_NAMESPACE: astrahle
+  # IMAGE_NAMESPACE: astrahle
 
 jobs:
   build:
@@ -32,13 +32,13 @@ jobs:
           dockerfiles: |
             ./MyGL/Dockerfile
       
-      - name: Push to ${{ env.IMAGE_REGISTRY }}
+      - name: "Push to ${{ env.IMAGE_REGISTRY }}"
         id: push-to-registry
         uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ steps.build-image.outputs.image }}
           tags: ${{ steps.build-image.outputs.tags }}
-          registry: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAMESPACE }}
+          registry: ${{ env.IMAGE_REGISTRY }}/${{ github.repository_owner }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
