@@ -6,16 +6,15 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu18.04
+    runs-on: ubuntu-latest
     name: Build on ${{ matrix.distro }} ${{ matrix.arch }}
     # Run steps on a matrix of 3 arch/distro combinations
     strategy:
       matrix:
         include:
           - arch: aarch64
-            distro: ubuntu18.04
+            distro: ubuntu-latest
 
-    environment: production
     steps:
       - uses: actions/checkout@v3
       - uses: uraimo/run-on-arch-action@v3
