@@ -7,8 +7,9 @@ on:
 env:
   IMAGE_NAME: mygl
   IMAGE_TAG: latest
-  IMAGE_REGISTRY: quay.io
+  IMAGE_REGISTRY: ghcr.io
   IMAGE_NAMESPACE: astrahle
+  environment: production
 
 jobs:
   build:
@@ -30,3 +31,14 @@ jobs:
           archs: arm64
           dockerfiles: |
             ./MyGL/Dockerfile
+      
+      - name: Push to {{ env.IMAGE_REGISTRY }}
+        id: push-to-registry
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-image.outputs.image }}
+          tags: ${{ steps.build-image.outputs.tags }}
+          registry: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAMESPACE }}
+
+      - name: Print image url
+        run: echo "Image pushed to ${{ steps.push-to-registry.outputs.registry-paths }}"
