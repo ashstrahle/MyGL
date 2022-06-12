@@ -5,19 +5,19 @@ on:
     branches: [ "master" ]
 
 jobs:
-
   build:
-  # Run steps on a matrix of 3 arch/distro combinations
+    runs-on: ubuntu-latest
+    name: Build on ${{ matrix.distro }} ${{ matrix.arch }}
+    # Run steps on a matrix of 3 arch/distro combinations
     strategy:
       matrix:
         include:
           - arch: aarch64
             distro: ubuntu-latest
 
-    runs-on: ubuntu-latest
     environment: production
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Build the Docker image
         working-directory: ${{env.GITHUB_WORKSPACE}}
