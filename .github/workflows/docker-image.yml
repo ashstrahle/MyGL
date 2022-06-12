@@ -38,6 +38,9 @@ jobs:
           # Pass some environment variables to the container
           env: | # YAML, but pipe character is necessary
             artifact_name: git-${{ matrix.distro }}_${{ matrix.arch }}
+          
+          install: |
+            cp MyGL/Dockerfile /home/runner/work/_actions/uraimo/run-on-arch-action/v2/Dockerfiles/Dockerfile.aarch64.ubuntu-latest
 
           run: |
             cp $(which git) "/artifacts/${artifact_name}"
