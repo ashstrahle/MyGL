@@ -11,7 +11,7 @@ services:
       - MSSQL_PID=Developer
       - ACCEPT_EULA='Y'
     env_file:
-      - ".mygl.env"
+      - ".env"
     volumes:
       - type: volume
         source: data
