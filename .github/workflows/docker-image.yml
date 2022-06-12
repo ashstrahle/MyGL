@@ -44,13 +44,13 @@ jobs:
       - name: Print image url
         run: echo "Image pushed to ${{ steps.push-to-registry.outputs.registry-paths }}"
 
-  name: Deploy to master
-  runs-on: self-hosted
-  environment: production
+    name: Deploy to master
+    runs-on: self-hosted
+    environment: production
 
-  steps:
-    run: |
-      cd /var/lib/docker-compose/mygl
-      docker-compose down
-      docker pull ghcr.io/ashstrahle/mygl:latest
-      docker-compose up
+    steps:
+      run: |
+        cd /var/lib/docker-compose/mygl
+        docker-compose down
+        docker pull ghcr.io/ashstrahle/mygl:latest
+        docker-compose up
