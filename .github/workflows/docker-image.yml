@@ -54,6 +54,6 @@ jobs:
       - run: |
           cd /var/lib/docker-compose/MyGL
           git pull
-          docker-compose down
-          docker pull ghcr.io/ashstrahle/mygl:latest
-          docker-compose up
+          sudo docker-compose down
+          sudo docker pull ghcr.io/ashstrahle/mygl:latest
+          sudo docker-compose up
