@@ -17,10 +17,10 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - uses: actions/checkout@v3
-      - name: Build the Docker image
-        working-directory: ${{env.GITHUB_WORKSPACE}}
-        run: .
-          - sudo docker-compose build
-          # - docker build . --file Dockerfile --tag MyGL-aarch64:latest
-         - docker push ghcr.io/OWNER/MyGL-aarch64:latest
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: .
+        - sudo docker-compose build
+        # - docker build . --file Dockerfile --tag MyGL-aarch64:latest
+        - docker push ghcr.io/OWNER/MyGL-aarch64:latest
