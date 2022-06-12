@@ -4,53 +4,29 @@ on:
   push:
     branches: [ "master" ]
 
+env:
+  IMAGE_NAME: MyGL
+  IMAGE_TAG: latest
+  IMAGE_REGISTRY: quay.io
+  IMAGE_NAMESPACE: astrahle
+
 jobs:
   build:
+    name: Build and push multi-arch image
     runs-on: ubuntu-latest
-    name: Build on ${{ matrix.distro }} ${{ matrix.arch }}
-    # Run steps on a matrix of 3 arch/distro combinations
-    strategy:
-      matrix:
-        include:
-          - arch: aarch64
-            distro: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
-      - uses: uraimo/run-on-arch-action@v2
-        name: Build artifact
-        id: build
+      
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+        
+      - name: Build image 
+        id: build-image
+        uses: redhat-actions/buildah-build@v2
         with:
-          arch: ${{ matrix.arch }}
-          distro: ${{ matrix.distro }}
-
-          # Not required, but speeds up builds
-          githubToken: ${{ github.token }}
-
-          # Create an artifacts directory
-          setup: |
-            echo "${PWD}"
-            echo "$(which git)"
-            mkdir -p "${PWD}/artifacts"
-            cp MyGL/Dockerfile /home/runner/work/_actions/uraimo/run-on-arch-action/v2/Dockerfiles/Dockerfile.aarch64.ubuntu-latest
-
-          # Mount the artifacts directory as /artifacts in the container
-          dockerRunArgs: |
-            --volume "${PWD}/artifacts:/artifacts"
-
-          # Pass some environment variables to the container
-          env: | # YAML, but pipe character is necessary
-            artifact_name: git-${{ matrix.distro }}_${{ matrix.arch }}
-
-          run: |
-            cp $(which git) "/artifacts/${artifact_name}"
-            echo "Produced artifact at /artifacts/${artifact_name}"
-            # sudo docker-compose build
-            # docker build . --file Dockerfile --tag MyGL$-{{ matrix.arch }}:latest
-            # docker push ghcr.io/OWNER/MyGL-{{ matrix.arch }}:latest
-            
-      - name: Show the artifact
-        # Items placed in /artifacts in the container will be in
-        # ${PWD}/artifacts on the host.
-        run: |
-          ls -al "${PWD}/artifacts"
+          image: ${{ env.IMAGE_NAME }}
+          tags: ${{ env.IMAGE_TAG }}
+          archs: aarch64
+          dockerfiles: |
+            ./MyGL/Dockerfile
