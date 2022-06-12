@@ -1,4 +1,5 @@
-﻿services:
+﻿version: "3.3"
+services:
   db:
     image: "mcr.microsoft.com/azure-sql-edge"
     user: root
