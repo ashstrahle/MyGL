@@ -50,6 +50,7 @@ jobs:
     environment: production
 
     steps:
+      needs: [build]
       - run: |
           cd /var/lib/docker-compose/mygl
           docker-compose down
