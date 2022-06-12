@@ -5,7 +5,7 @@ on:
     branches: [ "master" ]
 
 env:
-  IMAGE_NAME: MyGL
+  IMAGE_NAME: mygl
   IMAGE_TAG: latest
   IMAGE_REGISTRY: quay.io
   IMAGE_NAMESPACE: astrahle
@@ -27,6 +27,6 @@ jobs:
         with:
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ env.IMAGE_TAG }}
-          archs: aarch64
+          archs: arm64
           dockerfiles: |
             ./MyGL/Dockerfile
