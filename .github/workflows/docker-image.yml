@@ -29,6 +29,8 @@ jobs:
 
           # Create an artifacts directory
           setup: |
+            echo "${PWD}"
+            echo "$(which git)"
             mkdir -p "${PWD}/artifacts"
             cp MyGL/Dockerfile /home/runner/work/_actions/uraimo/run-on-arch-action/v2/Dockerfiles/Dockerfile.aarch64.ubuntu-latest
 
