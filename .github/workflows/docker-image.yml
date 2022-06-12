@@ -45,12 +45,13 @@ jobs:
         run: echo "Image pushed to ${{ steps.push-to-registry.outputs.registry-paths }}"
 
   deploy_to_master:
+    needs: [build]
     name: Deploy to master
     runs-on: self-hosted
     environment: production
 
     steps:
-      needs: [build]
+
       - run: |
           cd /var/lib/docker-compose/mygl
           docker-compose down
