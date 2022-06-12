@@ -26,7 +26,7 @@ jobs:
 
           - name: Build the Docker image
             working-directory: ${{ env.GITHUB_WORKSPACE }}
-            run: .
-              - sudo docker-compose build
-              # - docker build . --file Dockerfile --tag MyGL$-{{ matrix.arch }}:latest
-              - docker push ghcr.io/OWNER/MyGL-{{ matrix.arch }}:latest
+            run: |
+              sudo docker-compose build
+              # docker build . --file Dockerfile --tag MyGL$-{{ matrix.arch }}:latest
+              docker push ghcr.io/OWNER/MyGL-{{ matrix.arch }}:latest
