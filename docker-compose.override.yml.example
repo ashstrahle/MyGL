@@ -1,0 +1,8 @@
+services:
+  mygl:
+    image: ${DOCKER_REGISTRY-}mygl
+    build:
+      context: .
+      dockerfile: MyGL/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development

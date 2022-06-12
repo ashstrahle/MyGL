@@ -1,0 +1,59 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+
+env:
+  IMAGE_NAME: mygl
+  IMAGE_TAG: latest
+  IMAGE_REGISTRY: ghcr.io
+
+jobs:
+  build:
+    name: Build and push multi-arch image
+    environment: production
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+        
+      - name: Build image 
+        id: build-image
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: ${{ env.IMAGE_NAME }}
+          tags: ${{ env.IMAGE_TAG }}
+          archs: arm64, amd64
+          dockerfiles: |
+            ./MyGL/Dockerfile
+      
+      - name: "Push to ${{ env.IMAGE_REGISTRY }}"
+        id: push-to-registry
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-image.outputs.image }}
+          tags: ${{ steps.build-image.outputs.tags }}
+          registry: ${{ env.IMAGE_REGISTRY }}/${{ github.repository_owner }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Print image url
+        run: echo "Image pushed to ${{ steps.push-to-registry.outputs.registry-paths }}"
+
+  deploy_to_prod:
+    needs: [build]
+    name: Deploy to prod
+    runs-on: self-hosted
+    environment: production
+
+    steps:
+      - run: |
+          cd /var/lib/docker-compose/MyGL
+          git pull
+          sudo docker-compose down -t 120
+          sudo docker pull ghcr.io/ashstrahle/mygl:latest
+          sudo docker-compose up -d -t 120
