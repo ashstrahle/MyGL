@@ -9,11 +9,11 @@ env:
   IMAGE_TAG: latest
   IMAGE_REGISTRY: ghcr.io
   IMAGE_NAMESPACE: astrahle
-  environment: production
 
 jobs:
   build:
     name: Build and push multi-arch image
+    environment: production
     runs-on: ubuntu-latest
 
     steps:
@@ -32,13 +32,15 @@ jobs:
           dockerfiles: |
             ./MyGL/Dockerfile
       
-      - name: Push to {{ env.IMAGE_REGISTRY }}
+      - name: Push to ${{ env.IMAGE_REGISTRY }}
         id: push-to-registry
         uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ steps.build-image.outputs.image }}
           tags: ${{ steps.build-image.outputs.tags }}
           registry: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAMESPACE }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Print image url
         run: echo "Image pushed to ${{ steps.push-to-registry.outputs.registry-paths }}"
