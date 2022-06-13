@@ -10,7 +10,7 @@ WORKDIR /src
 COPY ["app/MyGL/MyGL.csproj", "app/MyGL/"]
 RUN dotnet restore "app/MyGL/MyGL.csproj"
 COPY . .
-WORKDIR "/src/MyGL"
+WORKDIR "/src/MyGL/app"
 RUN dotnet clean
 RUN dotnet build "MyGL.csproj" -c Release -o /app/build
 
