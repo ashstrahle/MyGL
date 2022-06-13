@@ -9,7 +9,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["app/MyGL/MyGL.csproj", "MyGL/"]
 RUN dotnet restore "MyGL/MyGL.csproj"
-COPY . .
+COPY ./app .
 WORKDIR "/src/MyGL"
 RUN dotnet clean
 RUN dotnet build "MyGL.csproj" -c Release -o /app/build
